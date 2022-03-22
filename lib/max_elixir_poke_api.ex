@@ -10,7 +10,7 @@ defmodule MaxElixirPokeApi do
       { :ok, %HTTPoison.Response{ body: body } } ->
         body
       { :error, %HTTPoison.Error{ reason: reason } } ->
-        { :erro, reason }
+        { :error, reason }
     end
   end
 end

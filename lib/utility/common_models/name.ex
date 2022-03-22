@@ -1,9 +1,7 @@
-defmodule MaxElixirPokeApi.BerryFlavorMap do
-  alias MaxElixirPokeApi.Utility.CommonModels.NamedApiResource, as: NamedApiResource
+defmodule MaxElixirPokeApi.Utility.CommonModels.Name do
+  defstruct [ :name, :language ]
 
-  defstruct [ :potency, :flavor ]
-
-  @keys ~w(potency flavor)
+  @keys ~w(name language)
 
   def decode(%{} = map) do
     map

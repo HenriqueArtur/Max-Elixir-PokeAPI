@@ -1,24 +1,24 @@
 defmodule MaxElixirPokeApi.Berry do
   alias MaxElixirPokeApi, as: MaxElixir
   alias MaxElixirPokeApi.BerryFlavorMap, as: BerryFlavorMap
-  import Poison
+  alias MaxElixirPokeApi.Utility.CommonModels.NamedAPIResource, as: NamedAPIResource
 
-  @keys [
-    id: nil,
-    name: nil,
-    growth_time: nil,
-    max_harvest: nil,
-    natural_gift_power: nil,
-    size: nil,
-    smoothness: nil,
-    soil_dryness: nil,
-    firmness: %MaxElixir.NamedApiResource{},
-    flavors: [],
-    item: %MaxElixir.NamedApiResource{},
-    natural_gift_type: %MaxElixir.NamedApiResource{},
+  defstruct [
+    :id,
+    :name,
+    :growth_time,
+    :max_harvest,
+    :natural_gift_power,
+    :size,
+    :smoothness,
+    :soil_dryness,
+    :firmness,
+    :flavors,
+    :item,
+    :natural_gift_type,
   ]
 
-  defstruct @keys
+  @keys ~w(id name growth_time max_harvest natural_gift_power size smoothness soil_dryness firmness flavors item natural_gift_type)
 
   def get(berry) do
     cond do
@@ -40,27 +40,31 @@ defmodule MaxElixirPokeApi.Berry do
       is_bitstring(berry) ->
         MaxElixir.uri <> "berry/" <> URI.encode(berry)
           |> MaxElixir.get()
-          |> Poison.decode!(as: %__MODULE__{})
-          |> set_flavors_structs()
+          |> Poison.decode!()
+          |> decode()
       is_integer(berry) ->
         MaxElixir.uri <> "berry/" <> to_string(berry)
           |> MaxElixir.get()
-          |> Poison.decode!(as: %__MODULE__{})
-          |> set_flavors_structs()
+          |> Poison.decode!()
+          |> decode()
       true ->
         :wrong_entry
     end
   end
 
-  defp set_flavors_structs(berry) do
-    new_berry_struct = berry
-    flavors = Enum.map(berry.flavors, fn flavor -> convert_flavor(flavor) end)
-    new_berry_struct["flavors"] = flavors
-    new_berry_struct
+  def decode(%{} = map) do
+    map
+      |> Map.take(@keys)
+      |> Enum.map(fn({k, v}) -> {String.to_existing_atom(k), v} end)
+      |> Enum.map(&decode/1)
+      |> fn(data) -> struct(__MODULE__, data) end.()
   end
 
-  defp convert_flavor(flavor) do
-    new_flavor = %BerryFlavorMap{}
-    %{new_flavor | __struct__: BerryFlavorMap}
+  def decode({:flavors, flavors}) when is_list(flavors) do
+    {:flavors, Enum.map(flavors, &BerryFlavorMap.decode/1)}
   end
+
+  def decode({k, _v} = data) when (k == :firmness or k == :item or k == :natural_gift_type), do: NamedAPIResource.decode(data)
+
+  def decode({k, v}), do: {k, v}
 end
