@@ -1,17 +1,8 @@
 defmodule MaxElixirPokeApi.BerryFlavorMap do
-  alias MaxElixirPokeApi.Utility.CommonModels.NamedApiResource, as: NamedApiResource
+  import Decoder
+  alias MaxElixirPokeApi.Utility.CommonModels.NamedAPIResource, as: NamedAPIResource
 
-  defstruct [ :potency, :flavor ]
-
-  @keys ~w(potency flavor)
-
-  def decode(%{} = map) do
-    map
-      |> Map.take(@keys)
-      |> Enum.map(fn({k, v}) -> {String.to_existing_atom(k), v} end)
-      |> Enum.map(&decode/1)
-      |> fn(data) -> struct(__MODULE__, data) end.()
+  mdecode ~w(potency flavor) do
+    mstruct :flavor, NamedAPIResource
   end
-
-  def decode({k, v}), do: {k, v}
 end

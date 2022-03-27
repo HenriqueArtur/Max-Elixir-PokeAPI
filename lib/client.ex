@@ -1,12 +1,9 @@
-defmodule MaxElixirPokeApi do
-  import HTTPoison
+defmodule Client do
+  alias Constant.URL, as: URL
+  @base URL.get()
 
-  @uri "https://pokeapi.co/api/v2/"
-
-  def uri, do: @uri
-
-  def get(uri) do
-    case HTTPoison.get(uri) do
+  def get(url) do
+    case HTTPoison.get(@base <> url) do
       { :ok, %HTTPoison.Response{ body: body } } ->
         body
       { :error, %HTTPoison.Error{ reason: reason } } ->
