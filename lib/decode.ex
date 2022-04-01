@@ -25,6 +25,7 @@ defmodule Decoder do
           |> fn(data) -> struct(__MODULE__, data) end.()
         { k, named_api_struct }
       end
+
     end
   end
 

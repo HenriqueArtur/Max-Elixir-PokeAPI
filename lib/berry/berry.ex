@@ -1,5 +1,6 @@
 defmodule MaxElixirPokeApi.Berry do
   import Decoder
+  import Get
   alias Client
   alias Constant.Endpoint, as: Endpoint
   alias MaxElixirPokeApi.BerryFlavorMap, as: BerryFlavorMap
@@ -14,22 +15,5 @@ defmodule MaxElixirPokeApi.Berry do
     mstruct :natural_gift_type, NamedAPIResource
   end
 
-  def get(berry) do
-    cond do
-      is_bitstring(berry) ->
-        @endpoint <> URI.encode(berry)
-          |> Client.get()
-          |> Poison.decode!()
-      is_integer(berry) ->
-        @endpoint <> to_string(berry)
-          |> Client.get()
-          |> Poison.decode!()
-      true ->
-        :wrong_entry
-    end
-  end
-
-  def get(berry, :with_struct) do
-    get(berry) |> decode()
-  end
+  mget @endpoint
 end
