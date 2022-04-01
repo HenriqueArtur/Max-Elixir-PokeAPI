@@ -7,7 +7,7 @@ defmodule MaxElixirPokeApi.BerryFlavor do
   alias MaxElixirPokeApi.Utility.CommonModels.Name, as: Name
   alias MaxElixirPokeApi.Utility.CommonModels.NamedAPIResource, as: NamedAPIResource
 
-  @endpoint Endpoint.get(:BerryFlavor)
+  @endpoint Endpoint.get(:berry_flavor)
 
   mdecode ~w(id name berries contest_type names) do
     mlist :names, Name
