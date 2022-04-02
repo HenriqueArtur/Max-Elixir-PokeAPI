@@ -6,6 +6,8 @@ defmodule Decoder do
     quote do
       defstruct Enum.map(unquote(str_fields), &String.to_atom/1)
 
+      def decode({k, v}) when k == :error, do: {:error, v}
+
       def decode(%{} = map) do
         map
           |> Map.take(unquote(str_fields))

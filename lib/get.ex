@@ -18,7 +18,7 @@ defmodule Get do
               |> Client.get()
               |> Poison.decode!()
           true ->
-            :wrong_entry
+            {:error, :wrong_entry}
         end
       end
     end
