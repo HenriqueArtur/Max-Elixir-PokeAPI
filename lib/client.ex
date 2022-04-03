@@ -16,7 +16,8 @@ defmodule Client do
   defp response({:error, %{reason: reason}}), do: {:error, reason}
 
   defp decode({:ok, body}) do
-    Jason.decode!(body)
+    map = Jason.decode!(body)
+    {:ok, map}
   end
 
   defp decode({:error, _reason} = response) do
