@@ -1,6 +1,8 @@
 defmodule Get do
   defmacro mget resource do
     quote do
+      require Client
+
       def get(id_or_name) do
         with {:ok, resouce_map} <- get(id_or_name, :no_struct) do
           decode(resouce_map)
@@ -11,9 +13,8 @@ defmodule Get do
 
       def get(id_or_name, :no_struct) do
         with {:ok, url} <- generate_url(id_or_name),
-            {:ok, body} <- Client.get(url) do
-          resouce_map = Poison.decode!(body)
-          {:ok, resouce_map}
+             {:ok, body} <- Client.get(url) do
+          {:ok, body}
         else
           {:error, message} -> {:error, message}
         end

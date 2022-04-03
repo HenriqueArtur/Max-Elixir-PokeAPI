@@ -1,7 +1,6 @@
 defmodule MaxElixirPokeApi.BerryFlavor do
   import Decoder
   import Get
-  alias Client
   alias Constant.Endpoint, as: Endpoint
   alias MaxElixirPokeApi.BerryFlavorMap, as: BerryFlavorMap
   alias MaxElixirPokeApi.Utility.CommonModels.Name, as: Name
