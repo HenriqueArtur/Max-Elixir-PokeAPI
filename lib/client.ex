@@ -1,4 +1,6 @@
 defmodule Client do
+  @compile if Mix.env == :test, do: :export_all
+
   alias Constant.URL, as: URL
   require Jason
 
