@@ -78,5 +78,10 @@ defmodule ClientTest do
       response = Client.get("banana/1")
       assert {:error, _} = response
     end
+
+    test "when has fail boolean [:error]" do
+      response = Client.get(true)
+      assert {:error, _} = response
+    end
   end
 end
