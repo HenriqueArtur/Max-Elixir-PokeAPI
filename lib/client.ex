@@ -6,7 +6,7 @@ defmodule Client do
 
   def get(url) do
     @base <> url
-      |>HTTPoison.get()
+      |>http_client().get()
       |>response()
       |>decode()
   end
@@ -22,5 +22,9 @@ defmodule Client do
 
   defp decode({:error, _reason} = response) do
     response
+  end
+
+  defp http_client do
+    Application.get_env(:max_elixir_poke_api, :http_client)
   end
 end
