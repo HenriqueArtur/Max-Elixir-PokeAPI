@@ -2,21 +2,15 @@ defmodule Client do
   alias Constant.URL, as: URL
   require Jason
 
-  @callback get(url :: String.t) :: {:ok, %{}}
-  @callback get(url :: String.t) :: {:error, %{}}
+  @behaviour ClientBehaviour
 
-  @callback response({:ok, %{status_code: integer(), body: %{}}}) :: {:ok, body :: %{}}
-  @callback response({:ok, %{status_code: integer()}}) :: {:ok, %{reason: String.t}}
-  @callback response({:error, %{reason: String.t}}) :: {:ok, %{reason: String.t}}
-
-  @callback decode({:ok, %{}}) :: {:ok, %{}}
-  @callback decode({:error, %{reason: String.t}}) :: {:error, %{reason: String.t}}
+  @http_client Application.get_env(:max_elixir_poke_api, :http_adapter, HTTPoison)
 
   @base URL.get()
 
   def get(url) do
     @base <> url
-      |>http_client().get()
+      |>@http_client.get()
       |>response()
       |>decode()
   end
@@ -25,7 +19,7 @@ defmodule Client do
 
   defp response({:ok, %{status_code: status_code}}), do: {:error, %{reason: "HTTP Status '#{status_code}'"}}
 
-  defp response({:error, %{reason: reason}}), do: {:error, %{reason: reason}}
+  defp response({:error, reason: reason}), do: {:error, reason: reason}
 
   defp decode({:ok, body}) do
     map = Jason.decode!(body)
@@ -34,9 +28,5 @@ defmodule Client do
 
   defp decode({:error, _reason} = response) do
     response
-  end
-
-  defp http_client do
-    Application.get_env(:max_elixir_poke_api, :http_client)
   end
 end
