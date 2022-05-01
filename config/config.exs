@@ -1,3 +1,3 @@
 import Config
 
-config :max_elixir_poke_api, :http_client, HTTPoison
+import_config "#{config_env()}.exs"
