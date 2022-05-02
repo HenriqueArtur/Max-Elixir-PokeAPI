@@ -1,4 +1,4 @@
-defmodule MaxElixirPokeApi.Utility.CommonModels.Name do
+defmodule MaxElixirPokeApi.Resources.Utility.CommonModels.Name do
   import MaxElixirPokeApi.Helpers.{Decoder}
   alias MaxElixirPokeApi.Resources.Utility.CommonModels.{NamedAPIResource}
 
