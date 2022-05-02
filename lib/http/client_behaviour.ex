@@ -1,4 +1,4 @@
-defmodule ClientBehaviour do
+defmodule MaxElixirPokeApi.Http.ClientBehaviour do
   @type url :: binary
 
   @callback get(url) :: {:ok, %{}} | {:error, %{}}

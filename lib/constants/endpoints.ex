@@ -1,4 +1,4 @@
-defmodule Constant.Endpoint do
+defmodule MaxElixirPokeApi.Constants.Endpoint do
   @endpoints %{
     berry: "berry/",
     berry_firmness: "berry-firmness/",

@@ -1,9 +1,8 @@
-defmodule MaxElixirPokeApi.Berry do
-  import Decoder
-  import Get
-  alias Constant.Endpoint, as: Endpoint
-  alias MaxElixirPokeApi.BerryFlavorMap, as: BerryFlavorMap
-  alias MaxElixirPokeApi.Utility.CommonModels.NamedAPIResource, as: NamedAPIResource
+defmodule MaxElixirPokeApi.Resources.Berry do
+  import MaxElixirPokeApi.Helpers.{Decoder, Get}
+  alias MaxElixirPokeApi.Constants.{Endpoint}
+  alias MaxElixirPokeApi.Resources.{BerryFlavorMap}
+  alias MaxElixirPokeApi.Resources.Utility.CommonModels.{NamedAPIResource}
 
   @endpoint Endpoint.get(:berry)
 

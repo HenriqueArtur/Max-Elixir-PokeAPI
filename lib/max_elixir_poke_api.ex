@@ -1,0 +1,3 @@
+defmodule MaxElixirPokeApi do
+
+end

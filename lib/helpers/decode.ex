@@ -1,4 +1,4 @@
-defmodule Decoder do
+defmodule MaxElixirPokeApi.Helpers.Decoder do
   @doc "Defines a struct and decode/1 function."
   defmacro mdecode(str_fields, block \\ [do: nil])
 

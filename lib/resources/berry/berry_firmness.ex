@@ -1,9 +1,7 @@
-defmodule MaxElixirPokeApi.BerryFirmness do
-  import Decoder
-  import Get
-  alias Constant.Endpoint, as: Endpoint
-  alias MaxElixirPokeApi.Utility.CommonModels.Name, as: Name
-  alias MaxElixirPokeApi.Utility.CommonModels.NamedAPIResource, as: NamedAPIResource
+defmodule MaxElixirPokeApi.Resources.BerryFirmness do
+  import MaxElixirPokeApi.Helpers.{Decoder, Get}
+  alias MaxElixirPokeApi.Constants.{Endpoint}
+  alias MaxElixirPokeApi.Resources.Utility.CommonModels.{Name, NamedAPIResource}
 
   @endpoint Endpoint.get(:berry_firmness)
 

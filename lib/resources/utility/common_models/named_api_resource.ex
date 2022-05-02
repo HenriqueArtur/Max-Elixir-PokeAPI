@@ -1,5 +1,5 @@
 defmodule MaxElixirPokeApi.Utility.CommonModels.NamedAPIResource do
-  import Decoder
+  import MaxElixirPokeApi.Helpers.{Decoder}
 
   mdecode ~w(name url)
 end

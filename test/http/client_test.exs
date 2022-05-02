@@ -1,9 +1,9 @@
-defmodule ClientTest do
+defmodule MaxElixirPokeApi.Http.ClientTest do
   use ExUnit.Case, async: true
 
   import Mox
 
-  alias Http.{Mock}
+  alias MaxElixirPokeApi.Http.{Mock, Client}
 
   setup do
     response = {

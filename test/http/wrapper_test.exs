@@ -1,7 +1,7 @@
-defmodule Http.WrapperTest do
+defmodule MaxElixirPokeApi.Http.WrapperTest do
   use ExUnit.Case, async: true
 
-  alias Http.{Wrapper, Mock}
+  alias MaxElixirPokeApi.Http.{Wrapper, Mock}
 
   import Mox
 

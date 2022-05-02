@@ -1,8 +1,8 @@
-defmodule Client do
-  alias Constant.URL, as: URL
+defmodule MaxElixirPokeApi.Http.Client do
+  alias MaxElixirPokeApi.Constants.{URL}
   require Jason
 
-  @behaviour ClientBehaviour
+  @behaviour MaxElixirPokeApi.Http.ClientBehaviour
 
   @http_client Application.get_env(:max_elixir_poke_api, :http_adapter, HTTPoison)
 

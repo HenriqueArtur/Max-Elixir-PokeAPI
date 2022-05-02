@@ -1,7 +1,7 @@
-defmodule Get do
+defmodule MaxElixirPokeApi.Helpers.Get do
   defmacro mget resource do
     quote do
-      require Client
+      alias MaxElixirPokeApi.Http.{Client}
 
       def get(id_or_name) do
         with {:ok, resouce_map} <- get(id_or_name, :no_struct) do
