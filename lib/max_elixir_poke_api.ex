@@ -3,6 +3,8 @@ defmodule MaxElixirPokeApi do
 
   def resource(:berry), do: do_request("berry")
   
+  def resource(_), do: {:error, %{reason: "resource invalid."}}
+  
   defp do_request(resource) do
     resource
     |> Helper.make_url
