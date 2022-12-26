@@ -3,6 +3,21 @@ defmodule MaxElixirPokeApiTest do
   doctest MaxElixirPokeApi
 
   @tag :pending
+  test "resource invalid [aton]" do
+    assert MaxElixirPokeApi.resource(:banana) == {:error, %{reason: "resource invalid."}}
+  end
+
+  @tag :pending
+  test "resource invalid [string]" do
+    assert MaxElixirPokeApi.resource("banana") == {:error, %{reason: "resource invalid."}}
+  end
+
+  @tag :pending
+  test "resource invalid [number]" do
+    assert MaxElixirPokeApi.resource(1) == {:error, %{reason: "resource invalid."}}
+  end
+
+  @tag :pending
   test "berry resource" do
     berry_resource = {:ok,
     %{
