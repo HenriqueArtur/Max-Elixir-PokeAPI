@@ -6,8 +6,18 @@ defmodule MaxElixirPokeApi.MixProject do
       app: :max_elixir_poke_api,
       version: "0.1.0",
       elixir: "~> 1.13",
+      deps: deps(),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      
+      # Doc
+      name: "MaxElixirPokeApi",
+      source_url: "https://github.com/HenriqueArtur/Max-Elixir-PokeAPI",
+      homepage_url: "https://github.com/HenriqueArtur/Max-Elixir-PokeAPI",
+      docs: [
+        main: "MaxElixirPokeApi", # The main page in the docs
+        # logo: "path/to/logo.png",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -22,7 +32,8 @@ defmodule MaxElixirPokeApi.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.7"},
-      {:jason, "~> 1.2"}
+      {:jason, "~> 1.2"},
+      {:ex_doc, "~> 0.27", only: :dev, runtime: false}
     ]
   end
 end
