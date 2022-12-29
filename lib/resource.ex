@@ -3,7 +3,7 @@ defmodule MaxElixirPokeApi.Resource do
   The resources functions.
   """
 
-  alias MaxElixirPokeApi.Helper
+  alias MaxElixirPokeApi.Request
 
   @typedoc """
   Resources from [PokeAPI](https://pokeapi.co/).
@@ -67,101 +67,101 @@ defmodule MaxElixirPokeApi.Resource do
   def resource(name), do: do_resource(name)
 
   @doc false
-  defp do_resource(:berry),                     do: Helper.do_request("berry")
+  defp do_resource(:berry),                     do: Request.get("berry")
   @doc false
-  defp do_resource(:berry_firmness),            do: Helper.do_request("berry-firmness")
+  defp do_resource(:berry_firmness),            do: Request.get("berry-firmness")
   @doc false
-  defp do_resource(:berry_flavor),              do: Helper.do_request("berry-flavor")
+  defp do_resource(:berry_flavor),              do: Request.get("berry-flavor")
   @doc false
-  defp do_resource(:contest_type),              do: Helper.do_request("contest-type")
+  defp do_resource(:contest_type),              do: Request.get("contest-type")
   @doc false
-  defp do_resource(:contest_effect),            do: Helper.do_request("contest-effect")
+  defp do_resource(:contest_effect),            do: Request.get("contest-effect")
   @doc false
-  defp do_resource(:super_contest_effect),      do: Helper.do_request("super-contest-effect")
+  defp do_resource(:super_contest_effect),      do: Request.get("super-contest-effect")
   @doc false
-  defp do_resource(:encounter_method),          do: Helper.do_request("encounter-method")
+  defp do_resource(:encounter_method),          do: Request.get("encounter-method")
   @doc false
-  defp do_resource(:encounter_condition),       do: Helper.do_request("encounter-condition")
+  defp do_resource(:encounter_condition),       do: Request.get("encounter-condition")
   @doc false
-  defp do_resource(:encounter_condition_value), do: Helper.do_request("encounter-condition-value")
+  defp do_resource(:encounter_condition_value), do: Request.get("encounter-condition-value")
   @doc false
-  defp do_resource(:evolution_chain),           do: Helper.do_request("evolution-chain")
+  defp do_resource(:evolution_chain),           do: Request.get("evolution-chain")
   @doc false
-  defp do_resource(:evolution_trigger),         do: Helper.do_request("evolution-trigger")
+  defp do_resource(:evolution_trigger),         do: Request.get("evolution-trigger")
   @doc false
-  defp do_resource(:generation),                do: Helper.do_request("generation")
+  defp do_resource(:generation),                do: Request.get("generation")
   @doc false
-  defp do_resource(:pokedex),                   do: Helper.do_request("pokedex")
+  defp do_resource(:pokedex),                   do: Request.get("pokedex")
   @doc false
-  defp do_resource(:version),                   do: Helper.do_request("version")
+  defp do_resource(:version),                   do: Request.get("version")
   @doc false
-  defp do_resource(:version_group),             do: Helper.do_request("version-group")
+  defp do_resource(:version_group),             do: Request.get("version-group")
   @doc false
-  defp do_resource(:item),                      do: Helper.do_request("item")
+  defp do_resource(:item),                      do: Request.get("item")
   @doc false
-  defp do_resource(:item_attribute),            do: Helper.do_request("item-attribute")
+  defp do_resource(:item_attribute),            do: Request.get("item-attribute")
   @doc false
-  defp do_resource(:item_category),             do: Helper.do_request("item-category")
+  defp do_resource(:item_category),             do: Request.get("item-category")
   @doc false
-  defp do_resource(:item_fling_effect),         do: Helper.do_request("item-fling-effect")
+  defp do_resource(:item_fling_effect),         do: Request.get("item-fling-effect")
   @doc false
-  defp do_resource(:item_pocket),               do: Helper.do_request("item-pocket")
+  defp do_resource(:item_pocket),               do: Request.get("item-pocket")
   @doc false
-  defp do_resource(:location),                  do: Helper.do_request("location")
+  defp do_resource(:location),                  do: Request.get("location")
   @doc false
-  defp do_resource(:location_area),             do: Helper.do_request("location-area")
+  defp do_resource(:location_area),             do: Request.get("location-area")
   @doc false
-  defp do_resource(:pal_park_area),             do: Helper.do_request("pal-park-area")
+  defp do_resource(:pal_park_area),             do: Request.get("pal-park-area")
   @doc false
-  defp do_resource(:region),                    do: Helper.do_request("region")
+  defp do_resource(:region),                    do: Request.get("region")
   @doc false
-  defp do_resource(:machine),                   do: Helper.do_request("machine")
+  defp do_resource(:machine),                   do: Request.get("machine")
   @doc false
-  defp do_resource(:move),                      do: Helper.do_request("move")
+  defp do_resource(:move),                      do: Request.get("move")
   @doc false
-  defp do_resource(:move_ailment),              do: Helper.do_request("move-ailment")
+  defp do_resource(:move_ailment),              do: Request.get("move-ailment")
   @doc false
-  defp do_resource(:move_battle_style),         do: Helper.do_request("move-battle-style")
+  defp do_resource(:move_battle_style),         do: Request.get("move-battle-style")
   @doc false
-  defp do_resource(:move_category),             do: Helper.do_request("move-category")
+  defp do_resource(:move_category),             do: Request.get("move-category")
   @doc false
-  defp do_resource(:move_damage_class),         do: Helper.do_request("move-damage-class")
+  defp do_resource(:move_damage_class),         do: Request.get("move-damage-class")
   @doc false
-  defp do_resource(:move_learn_method),         do: Helper.do_request("move-learn-method")
+  defp do_resource(:move_learn_method),         do: Request.get("move-learn-method")
   @doc false
-  defp do_resource(:move_target),               do: Helper.do_request("move-target")
+  defp do_resource(:move_target),               do: Request.get("move-target")
   @doc false
-  defp do_resource(:ability),                   do: Helper.do_request("ability")
+  defp do_resource(:ability),                   do: Request.get("ability")
   @doc false
-  defp do_resource(:characteristic),            do: Helper.do_request("characteristic")
+  defp do_resource(:characteristic),            do: Request.get("characteristic")
   @doc false
-  defp do_resource(:egg_group),                 do: Helper.do_request("egg-group")
+  defp do_resource(:egg_group),                 do: Request.get("egg-group")
   @doc false
-  defp do_resource(:gender),                    do: Helper.do_request("gender")
+  defp do_resource(:gender),                    do: Request.get("gender")
   @doc false
-  defp do_resource(:growth_rate),               do: Helper.do_request("growth-rate")
+  defp do_resource(:growth_rate),               do: Request.get("growth-rate")
   @doc false
-  defp do_resource(:nature),                    do: Helper.do_request("nature")
+  defp do_resource(:nature),                    do: Request.get("nature")
   @doc false
-  defp do_resource(:pokeathlon_stat),           do: Helper.do_request("pokeathlon-stat")
+  defp do_resource(:pokeathlon_stat),           do: Request.get("pokeathlon-stat")
   @doc false
-  defp do_resource(:pokemon),                   do: Helper.do_request("pokemon")
+  defp do_resource(:pokemon),                   do: Request.get("pokemon")
   @doc false
-  defp do_resource(:pokemon_color),             do: Helper.do_request("pokemon-color")
+  defp do_resource(:pokemon_color),             do: Request.get("pokemon-color")
   @doc false
-  defp do_resource(:pokemon_form),              do: Helper.do_request("pokemon-form")
+  defp do_resource(:pokemon_form),              do: Request.get("pokemon-form")
   @doc false
-  defp do_resource(:pokemon_habitat),           do: Helper.do_request("pokemon-habitat")
+  defp do_resource(:pokemon_habitat),           do: Request.get("pokemon-habitat")
   @doc false
-  defp do_resource(:pokemon_shape),             do: Helper.do_request("pokemon-shape")
+  defp do_resource(:pokemon_shape),             do: Request.get("pokemon-shape")
   @doc false
-  defp do_resource(:pokemon_species),           do: Helper.do_request("pokemon-species")
+  defp do_resource(:pokemon_species),           do: Request.get("pokemon-species")
   @doc false
-  defp do_resource(:stat),                      do: Helper.do_request("stat")
+  defp do_resource(:stat),                      do: Request.get("stat")
   @doc false
-  defp do_resource(:type),                      do: Helper.do_request("type")
+  defp do_resource(:type),                      do: Request.get("type")
   @doc false
-  defp do_resource(:language),                  do: Helper.do_request("language")
+  defp do_resource(:language),                  do: Request.get("language")
   @doc false
   defp do_resource(_),                          do: {:error, %{reason: "resource invalid."}}
 end

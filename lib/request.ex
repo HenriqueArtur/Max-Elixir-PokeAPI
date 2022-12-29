@@ -1,4 +1,4 @@
-defmodule MaxElixirPokeApi.Helper do
+defmodule MaxElixirPokeApi.Request do
   @moduledoc false
 
   @url "https://pokeapi.co/api/v2/"
@@ -7,8 +7,8 @@ defmodule MaxElixirPokeApi.Helper do
   @doc """
   Request pipeline.
   """
-  @spec do_request(String.t()) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def do_request(resource) do
+  @spec get(String.t()) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def get(resource) do
     resource
     |> make_url
     |> client_get
