@@ -63,105 +63,105 @@ defmodule MaxElixirPokeApi.Resource do
 
   Created to be used in `MaxElixirPokeApi.resource/1`.
   """
-  @spec resource(api_resource) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def resource(name), do: do_resource(name)
+  @spec resource(api_resource, integer, integer) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def resource(name, limit, page), do: do_resource(name, limit, page)
 
   @doc false
-  defp do_resource(:berry),                     do: Request.get("berry")
+  defp do_resource(:berry, limit, page),                     do: Request.get("berry", limit, page)
   @doc false
-  defp do_resource(:berry_firmness),            do: Request.get("berry-firmness")
+  defp do_resource(:berry_firmness, limit, page),            do: Request.get("berry-firmness", limit, page)
   @doc false
-  defp do_resource(:berry_flavor),              do: Request.get("berry-flavor")
+  defp do_resource(:berry_flavor, limit, page),              do: Request.get("berry-flavor", limit, page)
   @doc false
-  defp do_resource(:contest_type),              do: Request.get("contest-type")
+  defp do_resource(:contest_type, limit, page),              do: Request.get("contest-type", limit, page)
   @doc false
-  defp do_resource(:contest_effect),            do: Request.get("contest-effect")
+  defp do_resource(:contest_effect, limit, page),            do: Request.get("contest-effect", limit, page)
   @doc false
-  defp do_resource(:super_contest_effect),      do: Request.get("super-contest-effect")
+  defp do_resource(:super_contest_effect, limit, page),      do: Request.get("super-contest-effect", limit, page)
   @doc false
-  defp do_resource(:encounter_method),          do: Request.get("encounter-method")
+  defp do_resource(:encounter_method, limit, page),          do: Request.get("encounter-method", limit, page)
   @doc false
-  defp do_resource(:encounter_condition),       do: Request.get("encounter-condition")
+  defp do_resource(:encounter_condition, limit, page),       do: Request.get("encounter-condition", limit, page)
   @doc false
-  defp do_resource(:encounter_condition_value), do: Request.get("encounter-condition-value")
+  defp do_resource(:encounter_condition_value, limit, page), do: Request.get("encounter-condition-value", limit, page)
   @doc false
-  defp do_resource(:evolution_chain),           do: Request.get("evolution-chain")
+  defp do_resource(:evolution_chain, limit, page),           do: Request.get("evolution-chain", limit, page)
   @doc false
-  defp do_resource(:evolution_trigger),         do: Request.get("evolution-trigger")
+  defp do_resource(:evolution_trigger, limit, page),         do: Request.get("evolution-trigger", limit, page)
   @doc false
-  defp do_resource(:generation),                do: Request.get("generation")
+  defp do_resource(:generation, limit, page),                do: Request.get("generation", limit, page)
   @doc false
-  defp do_resource(:pokedex),                   do: Request.get("pokedex")
+  defp do_resource(:pokedex, limit, page),                   do: Request.get("pokedex", limit, page)
   @doc false
-  defp do_resource(:version),                   do: Request.get("version")
+  defp do_resource(:version, limit, page),                   do: Request.get("version", limit, page)
   @doc false
-  defp do_resource(:version_group),             do: Request.get("version-group")
+  defp do_resource(:version_group, limit, page),             do: Request.get("version-group", limit, page)
   @doc false
-  defp do_resource(:item),                      do: Request.get("item")
+  defp do_resource(:item, limit, page),                      do: Request.get("item", limit, page)
   @doc false
-  defp do_resource(:item_attribute),            do: Request.get("item-attribute")
+  defp do_resource(:item_attribute, limit, page),            do: Request.get("item-attribute", limit, page)
   @doc false
-  defp do_resource(:item_category),             do: Request.get("item-category")
+  defp do_resource(:item_category, limit, page),             do: Request.get("item-category", limit, page)
   @doc false
-  defp do_resource(:item_fling_effect),         do: Request.get("item-fling-effect")
+  defp do_resource(:item_fling_effect, limit, page),         do: Request.get("item-fling-effect", limit, page)
   @doc false
-  defp do_resource(:item_pocket),               do: Request.get("item-pocket")
+  defp do_resource(:item_pocket, limit, page),               do: Request.get("item-pocket", limit, page)
   @doc false
-  defp do_resource(:location),                  do: Request.get("location")
+  defp do_resource(:location, limit, page),                  do: Request.get("location", limit, page)
   @doc false
-  defp do_resource(:location_area),             do: Request.get("location-area")
+  defp do_resource(:location_area, limit, page),             do: Request.get("location-area", limit, page)
   @doc false
-  defp do_resource(:pal_park_area),             do: Request.get("pal-park-area")
+  defp do_resource(:pal_park_area, limit, page),             do: Request.get("pal-park-area", limit, page)
   @doc false
-  defp do_resource(:region),                    do: Request.get("region")
+  defp do_resource(:region, limit, page),                    do: Request.get("region", limit, page)
   @doc false
-  defp do_resource(:machine),                   do: Request.get("machine")
+  defp do_resource(:machine, limit, page),                   do: Request.get("machine", limit, page)
   @doc false
-  defp do_resource(:move),                      do: Request.get("move")
+  defp do_resource(:move, limit, page),                      do: Request.get("move", limit, page)
   @doc false
-  defp do_resource(:move_ailment),              do: Request.get("move-ailment")
+  defp do_resource(:move_ailment, limit, page),              do: Request.get("move-ailment", limit, page)
   @doc false
-  defp do_resource(:move_battle_style),         do: Request.get("move-battle-style")
+  defp do_resource(:move_battle_style, limit, page),         do: Request.get("move-battle-style", limit, page)
   @doc false
-  defp do_resource(:move_category),             do: Request.get("move-category")
+  defp do_resource(:move_category, limit, page),             do: Request.get("move-category", limit, page)
   @doc false
-  defp do_resource(:move_damage_class),         do: Request.get("move-damage-class")
+  defp do_resource(:move_damage_class, limit, page),         do: Request.get("move-damage-class", limit, page)
   @doc false
-  defp do_resource(:move_learn_method),         do: Request.get("move-learn-method")
+  defp do_resource(:move_learn_method, limit, page),         do: Request.get("move-learn-method", limit, page)
   @doc false
-  defp do_resource(:move_target),               do: Request.get("move-target")
+  defp do_resource(:move_target, limit, page),               do: Request.get("move-target", limit, page)
   @doc false
-  defp do_resource(:ability),                   do: Request.get("ability")
+  defp do_resource(:ability, limit, page),                   do: Request.get("ability", limit, page)
   @doc false
-  defp do_resource(:characteristic),            do: Request.get("characteristic")
+  defp do_resource(:characteristic, limit, page),            do: Request.get("characteristic", limit, page)
   @doc false
-  defp do_resource(:egg_group),                 do: Request.get("egg-group")
+  defp do_resource(:egg_group, limit, page),                 do: Request.get("egg-group", limit, page)
   @doc false
-  defp do_resource(:gender),                    do: Request.get("gender")
+  defp do_resource(:gender, limit, page),                    do: Request.get("gender", limit, page)
   @doc false
-  defp do_resource(:growth_rate),               do: Request.get("growth-rate")
+  defp do_resource(:growth_rate, limit, page),               do: Request.get("growth-rate", limit, page)
   @doc false
-  defp do_resource(:nature),                    do: Request.get("nature")
+  defp do_resource(:nature, limit, page),                    do: Request.get("nature", limit, page)
   @doc false
-  defp do_resource(:pokeathlon_stat),           do: Request.get("pokeathlon-stat")
+  defp do_resource(:pokeathlon_stat, limit, page),           do: Request.get("pokeathlon-stat", limit, page)
   @doc false
-  defp do_resource(:pokemon),                   do: Request.get("pokemon")
+  defp do_resource(:pokemon, limit, page),                   do: Request.get("pokemon", limit, page)
   @doc false
-  defp do_resource(:pokemon_color),             do: Request.get("pokemon-color")
+  defp do_resource(:pokemon_color, limit, page),             do: Request.get("pokemon-color", limit, page)
   @doc false
-  defp do_resource(:pokemon_form),              do: Request.get("pokemon-form")
+  defp do_resource(:pokemon_form, limit, page),              do: Request.get("pokemon-form", limit, page)
   @doc false
-  defp do_resource(:pokemon_habitat),           do: Request.get("pokemon-habitat")
+  defp do_resource(:pokemon_habitat, limit, page),           do: Request.get("pokemon-habitat", limit, page)
   @doc false
-  defp do_resource(:pokemon_shape),             do: Request.get("pokemon-shape")
+  defp do_resource(:pokemon_shape, limit, page),             do: Request.get("pokemon-shape", limit, page)
   @doc false
-  defp do_resource(:pokemon_species),           do: Request.get("pokemon-species")
+  defp do_resource(:pokemon_species, limit, page),           do: Request.get("pokemon-species", limit, page)
   @doc false
-  defp do_resource(:stat),                      do: Request.get("stat")
+  defp do_resource(:stat, limit, page),                      do: Request.get("stat", limit, page)
   @doc false
-  defp do_resource(:type),                      do: Request.get("type")
+  defp do_resource(:type, limit, page),                      do: Request.get("type", limit, page)
   @doc false
-  defp do_resource(:language),                  do: Request.get("language")
+  defp do_resource(:language, limit, page),                  do: Request.get("language", limit, page)
   @doc false
-  defp do_resource(_),                          do: {:error, %{reason: "resource invalid."}}
+  defp do_resource(_, _limit, _page),                        do: {:error, %{reason: "resource invalid."}}
 end

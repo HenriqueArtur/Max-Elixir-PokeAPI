@@ -101,9 +101,24 @@ defmodule MaxElixirPokeApi do
           ]
         }}
 
+      iex> MaxElixirPokeApi.resource(:pokemon, 5, 5)
+      {:ok,
+        %{
+          "count" => 1154,
+          "next" => "https://pokeapi.co/api/v2/pokemon?offset=30&limit=5",
+          "previous" => "https://pokeapi.co/api/v2/pokemon?offset=20&limit=5",
+          "results" => [
+            %{"name" => "raichu", "url" => "https://pokeapi.co/api/v2/pokemon/26/"},
+            %{"name" => "sandshrew", "url" => "https://pokeapi.co/api/v2/pokemon/27/"},
+            %{"name" => "sandslash", "url" => "https://pokeapi.co/api/v2/pokemon/28/"},
+            %{"name" => "nidoran-f", "url" => "https://pokeapi.co/api/v2/pokemon/29/"},
+            %{"name" => "nidorina", "url" => "https://pokeapi.co/api/v2/pokemon/30/"}
+          ]
+        }}
+
       iex> MaxElixirPokeApi.resource(:banana)
       {:error, %{reason: "resource invalid."}}
   """
-  @spec resource(api_resource) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def resource(name), do: Resource.resource(name)
+  @spec resource(api_resource, integer, integer) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def resource(name, limit \\ 20, page \\ 0), do: Resource.resource(name, limit, page)
 end

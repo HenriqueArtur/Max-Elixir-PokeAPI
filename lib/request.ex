@@ -7,17 +7,19 @@ defmodule MaxElixirPokeApi.Request do
   @doc """
   Request pipeline.
   """
-  @spec get(String.t()) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def get(resource) do
+  @spec get(String.t(), integer, integer) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def get(resource, limit, page) do
     resource
-    |> make_url
+    |> make_url(limit, page)
     |> client_get
     |> response
     |> decode
   end
 
+  # @doc false
+  # defp make_url(resource), do: @url <> resource
   @doc false
-  defp make_url(resource), do: @url <> resource
+  defp make_url(resource, limit, page), do: @url <> resource <> "?limit=#{limit}&offset=#{limit * page}"
 
   @doc false
   defp client_get(url), do: @http_client.get(url)
