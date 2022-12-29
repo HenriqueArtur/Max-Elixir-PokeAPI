@@ -24,3 +24,6 @@ max_elixir_poke_api-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# VS Code files
+.vscode/
