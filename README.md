@@ -1,6 +1,7 @@
 # MaxElixirPokeApi
 
 **TODO: Add description**
+test: mix test --exclude not_runnable
 
 ## Installation
 

@@ -22,8 +22,7 @@ defmodule MaxElixirPokeApi.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.7"},
-      {:jason, "~> 1.2"},
-      {:mox, "~> 1.0", only: :test}
+      {:jason, "~> 1.2"}
     ]
   end
 end
