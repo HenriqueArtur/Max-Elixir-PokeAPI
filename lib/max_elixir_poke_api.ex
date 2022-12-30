@@ -24,6 +24,7 @@ defmodule MaxElixirPokeApi do
   alias MaxElixirPokeApi.Version
   alias MaxElixirPokeApi.VersionGroup
   alias MaxElixirPokeApi.Item
+  alias MaxElixirPokeApi.ItemAttribute
 
   @typedoc """
   Resources from [PokeAPI](https://pokeapi.co/).
@@ -287,4 +288,16 @@ defmodule MaxElixirPokeApi do
   """
   @spec item(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
   def item(id_or_name), do: Item.get(id_or_name)
+
+  @doc """
+  Return a Item Attribute.
+
+  Check `MaxElixirPokeApi.ItemAttribute` module for examples.
+
+  ## Parameters
+
+    - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-attribute/{id or name}/`
+  """
+  @spec item_attribute(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def item_attribute(id_or_name), do: ItemAttribute.get(id_or_name)
 end
