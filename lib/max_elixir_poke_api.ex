@@ -19,6 +19,7 @@ defmodule MaxElixirPokeApi do
   alias MaxElixirPokeApi.EncounterConditionValue
   alias MaxElixirPokeApi.EvolutionChain
   alias MaxElixirPokeApi.EvolutionTrigger
+  alias MaxElixirPokeApi.Generation
 
   @typedoc """
   Resources from [PokeAPI](https://pokeapi.co/).
@@ -222,4 +223,16 @@ defmodule MaxElixirPokeApi do
   """
   @spec evolution_trigger(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
   def evolution_trigger(id_or_name), do: EvolutionTrigger.get(id_or_name)
+
+  @doc """
+  Return a Generation.
+
+  Check `MaxElixirPokeApi.Generation` module for examples.
+
+  ## Parameters
+
+    - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/generation/{id or name}/`
+  """
+  @spec generation(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def generation(id_or_name), do: Generation.get(id_or_name)
 end
