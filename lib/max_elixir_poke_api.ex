@@ -129,7 +129,7 @@ defmodule MaxElixirPokeApi do
   def resource(name, limit \\ 20, page \\ 0), do: Resource.resource(name, limit, page)
 
   @doc """
-  Return a Berry
+  Return a Berry.
 
   ## Parameters
 
