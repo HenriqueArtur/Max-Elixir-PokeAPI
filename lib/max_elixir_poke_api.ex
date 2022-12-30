@@ -17,6 +17,7 @@ defmodule MaxElixirPokeApi do
   alias MaxElixirPokeApi.EncounterMethod
   alias MaxElixirPokeApi.EncounterCondition
   alias MaxElixirPokeApi.EncounterConditionValue
+  alias MaxElixirPokeApi.EvolutionChain
 
   @typedoc """
   Resources from [PokeAPI](https://pokeapi.co/).
@@ -195,4 +196,17 @@ defmodule MaxElixirPokeApi do
   """
   @spec encounter_condition_value(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
   def encounter_condition_value(id_or_name), do: EncounterConditionValue.get(id_or_name)
+
+  @doc """
+  Return a Evolution Chain.
+
+  Check `MaxElixirPokeApi.EvolutionChain` module for examples.
+
+  ## Parameters
+
+    - **id:** `Integer` that represents the resource identify. `https://pokeapi.co/api/v2/evolution-chain/{id}/`
+
+  """
+  @spec evolution_chain(integer) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def evolution_chain(id), do: EvolutionChain.get(id)
 end
