@@ -7,7 +7,7 @@ defmodule MaxElixirPokeApi.Request do
   @http_client Application.get_env(:max_elixir_poke_api, :http_adapter, HTTPoison)
 
   @doc """
-  Request pipeline.
+  Resource List endpoint pipeline.
   """
   @spec get(String.t(), integer, integer) :: {:ok, map} | {:error, %{reason: String.t()}}
   def get(resource, limit, page) do
@@ -18,6 +18,9 @@ defmodule MaxElixirPokeApi.Request do
     |> decode
   end
 
+  @doc """
+  Single Resource endpoint pipeline.
+  """
   @spec get(String.t(), id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
   def get(resource, id_or_name) do
     resource
