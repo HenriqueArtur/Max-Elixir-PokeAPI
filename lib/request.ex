@@ -30,7 +30,7 @@ defmodule MaxElixirPokeApi.Request do
     |> decode
   end
 
-  # @doc false
+  @doc false
   defp make_url(resource, id_or_name), do: @url <> resource <> "/" <> to_string(id_or_name)
   @doc false
   defp make_url(resource, limit, page), do: @url <> resource <> "?limit=#{limit}&offset=#{limit * page}"
