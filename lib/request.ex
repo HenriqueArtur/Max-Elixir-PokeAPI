@@ -1,11 +1,13 @@
 defmodule MaxElixirPokeApi.Request do
   @moduledoc false
 
+  @type id_or_name :: String.t() | integer
+
   @url "https://pokeapi.co/api/v2/"
   @http_client Application.get_env(:max_elixir_poke_api, :http_adapter, HTTPoison)
 
   @doc """
-  Request pipeline.
+  Resource List endpoint pipeline.
   """
   @spec get(String.t(), integer, integer) :: {:ok, map} | {:error, %{reason: String.t()}}
   def get(resource, limit, page) do
@@ -16,8 +18,20 @@ defmodule MaxElixirPokeApi.Request do
     |> decode
   end
 
-  # @doc false
-  # defp make_url(resource), do: @url <> resource
+  @doc """
+  Single Resource endpoint pipeline.
+  """
+  @spec get(String.t(), id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def get(resource, id_or_name) do
+    resource
+    |> make_url(id_or_name)
+    |> client_get
+    |> response
+    |> decode
+  end
+
+  @doc false
+  defp make_url(resource, id_or_name), do: @url <> resource <> "/" <> to_string(id_or_name)
   @doc false
   defp make_url(resource, limit, page), do: @url <> resource <> "?limit=#{limit}&offset=#{limit * page}"
 
