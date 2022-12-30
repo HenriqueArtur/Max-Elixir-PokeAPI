@@ -73,7 +73,7 @@ defmodule MaxElixirPokeApi do
 
   ## Parameters
 
-    - name: Aton that represents the resource from Poke API.
+    - **name:** `Atom` [`api_resource`] that represents the resource from Poke API.
 
   ## Examples
 
@@ -133,7 +133,7 @@ defmodule MaxElixirPokeApi do
 
   ## Parameters
 
-    - id_or_name: Integer or String that represents the resource identify. `https://pokeapi.co/api/v2/berry/{id or name}/`
+    - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/berry/{id or name}/`
 
   ## Examples
 
