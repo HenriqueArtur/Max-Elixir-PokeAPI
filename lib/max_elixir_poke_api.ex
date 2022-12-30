@@ -15,6 +15,7 @@ defmodule MaxElixirPokeApi do
   alias MaxElixirPokeApi.ContestEffect
   alias MaxElixirPokeApi.SuperContestEffect
   alias MaxElixirPokeApi.EncounterMethod
+  alias MaxElixirPokeApi.EncounterCondition
 
   @typedoc """
   Resources from [PokeAPI](https://pokeapi.co/).
@@ -169,4 +170,16 @@ defmodule MaxElixirPokeApi do
   """
   @spec encounter_method(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
   def encounter_method(id_or_name), do: EncounterMethod.get(id_or_name)
+
+  @doc """
+  Return a Encounter Condition.
+
+  Check `MaxElixirPokeApi.EncounterCondition` module for examples.
+
+  ## Parameters
+
+    - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/encounter-condition/{id or name}/`
+  """
+  @spec encounter_condition(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def encounter_condition(id_or_name), do: EncounterCondition.get(id_or_name)
 end
