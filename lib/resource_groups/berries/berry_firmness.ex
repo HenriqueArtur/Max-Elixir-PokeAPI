@@ -6,7 +6,7 @@ defmodule MaxElixirPokeApi.BerryFirmness do
   alias MaxElixirPokeApi.Request
 
   @doc """
-  Return a Berry Firmnesses.
+  Return a Berry Firmness.
   """
   @spec get(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
   def get(id_or_name) when is_bitstring(id_or_name) or is_integer(id_or_name), do: Request.get("berry-firmness", id_or_name)

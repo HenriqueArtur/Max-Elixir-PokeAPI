@@ -211,7 +211,7 @@ defmodule MaxElixirPokeApi do
   def berry(id_or_name), do: Berry.get(id_or_name)
 
   @doc """
-  Return a Berry Firmnesses.
+  Return a Berry Firmness.
 
   ## Parameters
 
