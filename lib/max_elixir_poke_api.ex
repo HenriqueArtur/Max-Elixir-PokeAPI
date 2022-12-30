@@ -27,6 +27,7 @@ defmodule MaxElixirPokeApi do
   alias MaxElixirPokeApi.ItemAttribute
   alias MaxElixirPokeApi.ItemCategory
   alias MaxElixirPokeApi.ItemFlingEffect
+  alias MaxElixirPokeApi.ItemPocket
 
   @typedoc """
   Resources from [PokeAPI](https://pokeapi.co/).
@@ -326,4 +327,14 @@ defmodule MaxElixirPokeApi do
   """
   @spec item_fling_effect(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
   def item_fling_effect(id_or_name), do: ItemFlingEffect.get(id_or_name)
+
+  @doc """
+  Return a Item Pocket.
+
+  ## Parameters
+
+    - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-pocket/{id or name}/`
+  """
+  @spec item_pocket(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def item_pocket(id_or_name), do: ItemPocket.get(id_or_name)
 end
