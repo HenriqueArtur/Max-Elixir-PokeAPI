@@ -1,7 +1,5 @@
 defmodule MaxElixirPokeApi.Resource do
-  @moduledoc """
-  The resources functions.
-  """
+  @moduledoc false
 
   alias MaxElixirPokeApi.Request
 
