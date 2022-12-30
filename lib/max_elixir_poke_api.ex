@@ -13,6 +13,7 @@ defmodule MaxElixirPokeApi do
   alias MaxElixirPokeApi.BerryFlavor
   alias MaxElixirPokeApi.ContestType
   alias MaxElixirPokeApi.ContestEffect
+  alias MaxElixirPokeApi.SuperContestEffect
 
   @typedoc """
   Resources from [PokeAPI](https://pokeapi.co/).
@@ -143,4 +144,16 @@ defmodule MaxElixirPokeApi do
   """
   @spec contest_effect(integer) :: {:ok, map} | {:error, %{reason: String.t()}}
   def contest_effect(id), do: ContestEffect.get(id)
+
+  @doc """
+  Return a Contest Contest Effect.
+
+  Check `MaxElixirPokeApi.SuperContestEffect` module for examples.
+
+  ## Parameters
+
+    - **id:** `Integer` that represents the resource identify. `https://pokeapi.co/api/v2/super-contest-effect/{id}/`
+  """
+  @spec super_contest_effect(integer) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def super_contest_effect(id), do: SuperContestEffect.get(id)
 end
