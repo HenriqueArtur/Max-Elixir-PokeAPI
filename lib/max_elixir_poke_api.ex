@@ -7,6 +7,7 @@ defmodule MaxElixirPokeApi do
   This package has all function explicit in [PokeAPI Doc](https://pokeapi.co/docs/v2).
   """
 
+  alias MaxElixirPokeApi.BerryFirmness
   alias MaxElixirPokeApi.Berry
   alias MaxElixirPokeApi.Resource
 
@@ -207,4 +208,62 @@ defmodule MaxElixirPokeApi do
   """
   @spec berry(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
   def berry(id_or_name), do: Berry.get(id_or_name)
+
+  @doc """
+  Return a Berry Firmnesses.
+
+  ## Parameters
+
+    - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/berry-firmness/{id or name}/`
+
+  ## Examples
+
+      iex> MaxElixirPokeApi.berry_firmness("very-soft")
+      {:ok,
+        %{
+          "berries" => [
+            %{"name" => "pecha", "url" => "https://pokeapi.co/api/v2/berry/3/"},
+            %{"name" => "pamtre", "url" => "https://pokeapi.co/api/v2/berry/32/"},
+            %{"name" => "belue", "url" => "https://pokeapi.co/api/v2/berry/35/"},
+            %{"name" => "wacan", "url" => "https://pokeapi.co/api/v2/berry/38/"},
+            %{"name" => "tanga", "url" => "https://pokeapi.co/api/v2/berry/46/"},
+            %{"name" => "charti", "url" => "https://pokeapi.co/api/v2/berry/47/"},
+            %{"name" => "chilan", "url" => "https://pokeapi.co/api/v2/berry/52/"},
+            %{"name" => "rowap", "url" => "https://pokeapi.co/api/v2/berry/64/"}
+          ],
+          "id" => 1,
+          "name" => "very-soft",
+          "names" => [
+            %{
+              "language" => %{
+                "name" => "fr",
+                "url" => "https://pokeapi.co/api/v2/language/5/"
+              },
+              "name" => "Très tendre"
+            },
+            %{
+              "language" => %{
+                "name" => "es",
+                "url" => "https://pokeapi.co/api/v2/language/7/"
+              },
+              "name" => "Muy blanda"
+            },
+            %{
+              "language" => %{
+                "name" => "en",
+                "url" => "https://pokeapi.co/api/v2/language/9/"
+              },
+              "name" => "Very Soft"
+            }
+          ]
+        }}
+
+      iex> MaxElixirPokeApi.berry_firmness(101)
+      {:error, %{reason: "HTTP Status '404'"}}
+
+      iex> MaxElixirPokeApi.berry_firmness(:banana)
+      {:error, %{reason: "&1 only accepts string or integer."}}
+  """
+  @spec berry_firmness(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def berry_firmness(id_or_name), do: BerryFirmness.get(id_or_name)
 end
