@@ -80,7 +80,7 @@ defmodule MaxElixirPokeApi do
     - **name:** `Atom` [`api_resource`] that represents the resource from Poke API.
   """
   @spec resource(api_resource, integer, integer) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def resource(name, limit \\ 20, page \\ 0), do: Resource.resource(name, limit, page)
+  def resource(name, limit \\ 20, page \\ 0), do: Resource.get(name, limit, page)
 
   @doc """
   Return a Berry.
