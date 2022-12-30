@@ -7,10 +7,11 @@ defmodule MaxElixirPokeApi do
   This package has all function explicit in [PokeAPI Doc](https://pokeapi.co/docs/v2).
   """
 
+  alias MaxElixirPokeApi.Resource
   alias MaxElixirPokeApi.Berry
   alias MaxElixirPokeApi.BerryFirmness
   alias MaxElixirPokeApi.BerryFlavor
-  alias MaxElixirPokeApi.Resource
+  alias MaxElixirPokeApi.ContestType
 
   @typedoc """
   Resources from [PokeAPI](https://pokeapi.co/).
@@ -117,4 +118,16 @@ defmodule MaxElixirPokeApi do
   """
   @spec berry_flavor(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
   def berry_flavor(id_or_name), do: BerryFlavor.get(id_or_name)
+
+  @doc """
+  Return a Contest Type.
+
+  Check `MaxElixirPokeApi.ContestType` module for examples.
+
+  ## Parameters
+
+    - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/contest-type/{id or name}/`
+  """
+  @spec contest_type(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def contest_type(id_or_name), do: ContestType.get(id_or_name)
 end
