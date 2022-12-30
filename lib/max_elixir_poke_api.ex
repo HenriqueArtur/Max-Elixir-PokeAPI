@@ -21,6 +21,7 @@ defmodule MaxElixirPokeApi do
   alias MaxElixirPokeApi.EvolutionTrigger
   alias MaxElixirPokeApi.Generation
   alias MaxElixirPokeApi.Pokedex
+  alias MaxElixirPokeApi.Version
 
   @typedoc """
   Resources from [PokeAPI](https://pokeapi.co/).
@@ -248,4 +249,16 @@ defmodule MaxElixirPokeApi do
   """
   @spec pokedex(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
   def pokedex(id_or_name), do: Pokedex.get(id_or_name)
+
+  @doc """
+  Return a Version.
+
+  Check `MaxElixirPokeApi.Version` module for examples.
+
+  ## Parameters
+
+    - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/version/{id or name}/`
+  """
+  @spec version(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def version(id_or_name), do: Version.get(id_or_name)
 end
