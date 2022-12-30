@@ -7,6 +7,7 @@ defmodule MaxElixirPokeApi do
   This package has all function explicit in [PokeAPI Doc](https://pokeapi.co/docs/v2).
   """
 
+  alias MaxElixirPokeApi.Berry
   alias MaxElixirPokeApi.Resource
 
   @typedoc """
@@ -61,6 +62,11 @@ defmodule MaxElixirPokeApi do
     | :stat
     | :type
     | :language
+
+  @typedoc """
+  Identifier as `{id or name}` used in `https://pokeapi.co/api/v2/{resource}/{id or name}/`
+  """
+  @type id_or_name :: String.t() | integer()
 
   @doc """
   Return a paginated list of available resources for that API. By default, a list "page" will contain up to 20 resources.
@@ -121,4 +127,14 @@ defmodule MaxElixirPokeApi do
   """
   @spec resource(api_resource, integer, integer) :: {:ok, map} | {:error, %{reason: String.t()}}
   def resource(name, limit \\ 20, page \\ 0), do: Resource.resource(name, limit, page)
+
+  @doc """
+  Return a Berry
+
+  ## Parameters
+
+    - id_or_name: Integer or String that represents the resource identify. `https://pokeapi.co/api/v2/berry/{id or name}/`
+  """
+  @spec berry(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
+  def berry(id_or_name), do: Berry.get(id_or_name)
 end
