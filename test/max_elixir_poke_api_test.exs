@@ -113,4 +113,63 @@ defmodule MaxElixirPokeApiTest do
       assert catch_error(MaxElixirPokeApi.berry_flavor(:banana)) == :function_clause
     end
   end
+
+  describe "contest_type/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.contest_type("cool")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["berry_flavor"] |> is_map
+    end
+
+    test "name not found" do
+      assert MaxElixirPokeApi.contest_type("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.contest_type(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.contest_type(:banana)) == :function_clause
+    end
+  end
+
+  describe "contest_effect/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.contest_effect(1)
+      assert resource["id"] |> is_integer
+      assert resource["jam"] |> is_integer
+      assert resource["appeal"] |> is_integer
+      assert resource["effect_entries"] |> is_list
+      assert resource["flavor_text_entries"] |> is_list
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.contest_effect(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.contest_effect(:banana)) == :function_clause
+    end
+  end
+
+  describe "super_contest_effect/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.super_contest_effect(1)
+      assert resource["id"] |> is_integer
+      assert resource["appeal"] |> is_integer
+      assert resource["moves"] |> is_list
+      assert resource["flavor_text_entries"] |> is_list
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.super_contest_effect(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.super_contest_effect(:banana)) == :function_clause
+    end
+  end
 end
