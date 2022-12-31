@@ -7,9 +7,15 @@ defmodule MaxElixirPokeApi do
   This package has all function explicit in [PokeAPI Doc](https://pokeapi.co/docs/v2).
   """
 
-  alias MaxElixirPokeApi.Request
+  @behaviour MaxElixirPokeApi.Behaviour
 
-  @type response :: {:ok, map} | {:error, %{reason: String.t()}}
+  alias MaxElixirPokeApi.{
+    Behaviour,
+    Request
+  }
+
+  @type id_or_name :: Behaviour.id_or_name
+  @type response :: Behaviour.response
 
   @resources_list %{
     berry: "berry",
@@ -62,20 +68,17 @@ defmodule MaxElixirPokeApi do
     language: "language",
   }
 
-  @typedoc """
-  Identifier as `{id or name}` used in `https://pokeapi.co/api/v2/{resource}/{id or name}/`
-  """
-  @type id_or_name :: String.t() | integer()
-
   @doc """
   Return a paginated list of available resources for that API. By default, a list "page" will contain up to 20 resources.
 
   ## Parameters
 
-    - **name:** `Atom` [`api_resource`] that represents the resource from Poke API.
+    - **name:** `Atom` [`@resources_list`] that represents the resource from Poke API.
   """
-  @spec resource(atom, integer, integer) :: response
-  def resource(name, limit \\ 20, page \\ 0), do: Request.get(@resources_list[name], limit, page)
+  @impl Behaviour
+  def resource(name, limit \\ 20, page \\ 0)
+    when is_atom(name) ,
+    do: Request.get(@resources_list[name], limit, page)
 
   @doc """
   Return a Berry.
@@ -84,8 +87,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/berry/{id or name}/`
   """
-  @spec berry(id_or_name) :: response
-  def berry(id_or_name), do: Request.get(@resources_list[:berry], id_or_name)
+  @impl Behaviour
+  def berry(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:berry], id_or_name)
 
   @doc """
   Return a Berry Firmness.
@@ -94,8 +99,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/berry-firmness/{id or name}/`
   """
-  @spec berry_firmness(id_or_name) :: response
-  def berry_firmness(id_or_name), do: Request.get(@resources_list[:berry_firmness], id_or_name)
+  @impl Behaviour
+  def berry_firmness(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:berry_firmness], id_or_name)
 
   @doc """
   Return a Berry Flavor.
@@ -104,8 +111,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/berry-flavor/{id or name}/`
   """
-  @spec berry_flavor(id_or_name) :: response
-  def berry_flavor(id_or_name), do: Request.get(@resources_list[:berry_flavor], id_or_name)
+  @impl Behaviour
+  def berry_flavor(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:berry_flavor], id_or_name)
 
   @doc """
   Return a Contest Type.
@@ -114,8 +123,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/contest-type/{id or name}/`
   """
-  @spec contest_type(id_or_name) :: response
-  def contest_type(id_or_name), do: Request.get(@resources_list[:contest_type], id_or_name)
+  @impl Behaviour
+  def contest_type(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:contest_type], id_or_name)
 
   @doc """
   Return a Contest Effect.
@@ -124,8 +135,10 @@ defmodule MaxElixirPokeApi do
 
     - **id:** `Integer` that represents the resource identify. `https://pokeapi.co/api/v2/contest-effect/{id}/`
   """
-  @spec contest_effect(integer) :: response
-  def contest_effect(id) when is_integer(id), do: Request.get(@resources_list[:contest_effect], id)
+  @impl Behaviour
+  def contest_effect(id)
+    when is_integer(id),
+    do: Request.get(@resources_list[:contest_effect], id)
 
   @doc """
   Return a Contest Contest Effect.
@@ -134,8 +147,10 @@ defmodule MaxElixirPokeApi do
 
     - **id:** `Integer` that represents the resource identify. `https://pokeapi.co/api/v2/super-contest-effect/{id}/`
   """
-  @spec super_contest_effect(integer) :: response
-  def super_contest_effect(id) when is_integer(id), do: Request.get(@resources_list[:super_contest_effect], id)
+  @impl Behaviour
+  def super_contest_effect(id)
+    when is_integer(id),
+    do: Request.get(@resources_list[:super_contest_effect], id)
 
   @doc """
   Return a Encounter Method.
@@ -144,8 +159,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/encounter-method/{id or name}/`
   """
-  @spec encounter_method(id_or_name) :: response
-  def encounter_method(id_or_name), do: Request.get(@resources_list[:encounter_method], id_or_name)
+  @impl Behaviour
+  def encounter_method(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:encounter_method], id_or_name)
 
   @doc """
   Return a Encounter Condition.
@@ -154,8 +171,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/encounter-condition/{id or name}/`
   """
-  @spec encounter_condition(id_or_name) :: response
-  def encounter_condition(id_or_name), do: Request.get(@resources_list[:encounter_condition], id_or_name)
+  @impl Behaviour
+  def encounter_condition(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:encounter_condition], id_or_name)
 
   @doc """
   Return a Encounter Condition Value.
@@ -164,8 +183,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/encounter-condition-value/{id or name}/`
   """
-  @spec encounter_condition_value(id_or_name) :: response
-  def encounter_condition_value(id_or_name), do: Request.get(@resources_list[:encounter_condition_value], id_or_name)
+  @impl Behaviour
+  def encounter_condition_value(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:encounter_condition_value], id_or_name)
 
   @doc """
   Return a Evolution Chain.
@@ -174,8 +195,10 @@ defmodule MaxElixirPokeApi do
 
     - **id:** `Integer` that represents the resource identify. `https://pokeapi.co/api/v2/evolution-chain/{id}/`
   """
-  @spec evolution_chain(integer) :: response
-  def evolution_chain(id) when is_integer(id), do: Request.get(@resources_list[:evolution_chain], id)
+  @impl Behaviour
+  def evolution_chain(id)
+    when is_integer(id),
+    do: Request.get(@resources_list[:evolution_chain], id)
 
    @doc """
   Return a Evolution Trigger.
@@ -184,8 +207,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/evolution-trigger/{id or name}/`
   """
-  @spec evolution_trigger(id_or_name) :: response
-  def evolution_trigger(id_or_name), do: Request.get(@resources_list[:evolution_trigger], id_or_name)
+  @impl Behaviour
+  def evolution_trigger(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:evolution_trigger], id_or_name)
 
   @doc """
   Return a Generation.
@@ -194,8 +219,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/generation/{id or name}/`
   """
-  @spec generation(id_or_name) :: response
-  def generation(id_or_name), do: Request.get(@resources_list[:generation], id_or_name)
+  @impl Behaviour
+  def generation(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:generation], id_or_name)
 
   @doc """
   Return a Pokedex.
@@ -204,8 +231,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/pokedex/{id or name}/`
   """
-  @spec pokedex(id_or_name) :: response
-  def pokedex(id_or_name), do: Request.get(@resources_list[:pokedex], id_or_name)
+  @impl Behaviour
+  def pokedex(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:pokedex], id_or_name)
 
   @doc """
   Return a Version.
@@ -214,8 +243,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/version/{id or name}/`
   """
-  @spec version(id_or_name) :: response
-  def version(id_or_name), do: Request.get(@resources_list[:version], id_or_name)
+  @impl Behaviour
+  def version(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:version], id_or_name)
 
   @doc """
   Return a Version Group.
@@ -224,8 +255,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/version-group/{id or name}/`
   """
-  @spec version_group(id_or_name) :: response
-  def version_group(id_or_name), do: Request.get(@resources_list[:version_group], id_or_name)
+  @impl Behaviour
+  def version_group(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:version_group], id_or_name)
 
   @doc """
   Return a Item.
@@ -234,8 +267,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item/{id or name}/`
   """
-  @spec item(id_or_name) :: response
-  def item(id_or_name), do: Request.get(@resources_list[:item], id_or_name)
+  @impl Behaviour
+  def item(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:item], id_or_name)
 
   @doc """
   Return a Item Attribute.
@@ -244,8 +279,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-attribute/{id or name}/`
   """
-  @spec item_attribute(id_or_name) :: response
-  def item_attribute(id_or_name), do: Request.get(@resources_list[:item_attribute], id_or_name)
+  @impl Behaviour
+  def item_attribute(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:item_attribute], id_or_name)
 
   @doc """
   Return a Item Category.
@@ -254,8 +291,10 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-category/{id or name}/`
   """
-  @spec item_category(id_or_name) :: response
-  def item_category(id_or_name), do: Request.get(@resources_list[:item_category], id_or_name)
+  @impl Behaviour
+  def item_category(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:item_category], id_or_name)
 
   @doc """
   Return a Item Fling Effect.
@@ -264,14 +303,18 @@ defmodule MaxElixirPokeApi do
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-fling-effect/{id or name}/`
   """
-  @spec item_fling_effect(id_or_name) :: response
-  def item_fling_effect(id_or_name), do: Request.get(@resources_list[:item_fling_effect], id_or_name)
+  @impl Behaviour
+  def item_fling_effect(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:item_fling_effect], id_or_name)
 
   @doc """
   Return a Item Pocket.
   ## Parameters
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-pocket/{id or name}/`
   """
-  @spec item_pocket(id_or_name) :: response
-  def item_pocket(id_or_name), do: Request.get(@resources_list[:item_pocket], id_or_name)
+  @impl Behaviour
+  def item_pocket(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:item_pocket], id_or_name)
 end
