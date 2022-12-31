@@ -172,4 +172,70 @@ defmodule MaxElixirPokeApiTest do
       assert catch_error(MaxElixirPokeApi.super_contest_effect(:banana)) == :function_clause
     end
   end
+
+  describe "encounter_method/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.encounter_method("walk")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["order"] |> is_integer
+    end
+
+    test "name not found" do
+      assert MaxElixirPokeApi.encounter_method("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.encounter_method(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.encounter_method(:banana)) == :function_clause
+    end
+  end
+
+  describe "encounter_condition/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.encounter_condition("swarm")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["values"] |> is_list
+    end
+
+    test "name not found" do
+      assert MaxElixirPokeApi.encounter_condition("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.encounter_condition(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.encounter_condition(:banana)) == :function_clause
+    end
+  end
+
+  describe "encounter_condition_value/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.encounter_condition_value("swarm-yes")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["condition"] |> is_map
+    end
+
+    test "name not found" do
+      assert MaxElixirPokeApi.encounter_condition_value("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.encounter_condition_value(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.encounter_condition_value(:banana)) == :function_clause
+    end
+  end
 end
