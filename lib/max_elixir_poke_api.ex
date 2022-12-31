@@ -7,80 +7,60 @@ defmodule MaxElixirPokeApi do
   This package has all function explicit in [PokeAPI Doc](https://pokeapi.co/docs/v2).
   """
 
-  alias MaxElixirPokeApi.Resource
-  alias MaxElixirPokeApi.Berry
-  alias MaxElixirPokeApi.BerryFirmness
-  alias MaxElixirPokeApi.BerryFlavor
-  alias MaxElixirPokeApi.ContestType
-  alias MaxElixirPokeApi.ContestEffect
-  alias MaxElixirPokeApi.SuperContestEffect
-  alias MaxElixirPokeApi.EncounterMethod
-  alias MaxElixirPokeApi.EncounterCondition
-  alias MaxElixirPokeApi.EncounterConditionValue
-  alias MaxElixirPokeApi.EvolutionChain
-  alias MaxElixirPokeApi.EvolutionTrigger
-  alias MaxElixirPokeApi.Generation
-  alias MaxElixirPokeApi.Pokedex
-  alias MaxElixirPokeApi.Version
-  alias MaxElixirPokeApi.VersionGroup
-  alias MaxElixirPokeApi.Item
-  alias MaxElixirPokeApi.ItemAttribute
-  alias MaxElixirPokeApi.ItemCategory
-  alias MaxElixirPokeApi.ItemFlingEffect
-  alias MaxElixirPokeApi.ItemPocket
+  alias MaxElixirPokeApi.Request
 
-  @typedoc """
-  Resources from [PokeAPI](https://pokeapi.co/).
-  """
-  @type api_resource ::
-      :berry
-    | :berry_firmness
-    | :berry_flavor
-    | :contest_type
-    | :contest_effect
-    | :super_contest_effect
-    | :encounter_method
-    | :encounter_condition
-    | :encounter_condition_value
-    | :evolution_chain
-    | :evolution_trigger
-    | :generation
-    | :pokedex
-    | :version
-    | :version_group
-    | :item
-    | :item_attribute
-    | :item_category
-    | :item_fling_effect
-    | :item_pocket
-    | :location
-    | :location_area
-    | :pal_park_area
-    | :region
-    | :machine
-    | :move
-    | :move_ailment
-    | :move_battle_style
-    | :move_category
-    | :move_damage_class
-    | :move_learn_method
-    | :move_target
-    | :ability
-    | :characteristic
-    | :egg_group
-    | :gender
-    | :growth_rate
-    | :nature
-    | :pokeathlon_stat
-    | :pokemon
-    | :pokemon_color
-    | :pokemon_form
-    | :pokemon_habitat
-    | :pokemon_shape
-    | :pokemon_species
-    | :stat
-    | :type
-    | :language
+  @type response :: {:ok, map} | {:error, %{reason: String.t()}}
+
+  @resources_list %{
+    berry: "berry",
+    berry_firmness: "berry-firmness",
+    berry_flavor: "berry-flavor",
+    contest_type: "contest-type",
+    contest_effect: "contest-effect",
+    super_contest_effect: "super-contest-effect",
+    encounter_method: "encounter-method",
+    encounter_condition: "encounter-condition",
+    encounter_condition_value: "encounter-condition-value",
+    evolution_chain: "evolution-chain",
+    evolution_trigger: "evolution-trigger",
+    generation: "generation",
+    pokedex: "pokedex",
+    version: "version",
+    version_group: "version-group",
+    item: "item",
+    item_attribute: "item-attribute",
+    item_category: "item-category",
+    item_fling_effect: "item_fling-effect",
+    item_pocket: "item-pocket",
+    location: "location",
+    location_area: "location-area",
+    pal_park_area: "pal-park-area",
+    region: "region",
+    machine: "machine",
+    move: "move",
+    move_ailment: "move-ailment",
+    move_battle_style: "move-battle-style",
+    move_category: "move-category",
+    move_damage_class: "move-damage-class",
+    move_learn_method: "move-learn-method",
+    move_target: "move-target",
+    ability: "ability",
+    characteristic: "characteristic",
+    egg_group: "egg-group",
+    gender: "gender",
+    growth_rate: "growth-rate",
+    nature: "nature",
+    pokeathlon_stat: "pokeathlon-stat",
+    pokemon: "pokemon",
+    pokemon_color: "pokemon-color",
+    pokemon_form: "pokemon-form",
+    pokemon_habitat: "pokemon-habitat",
+    pokemon_shape: "pokemon-shape",
+    pokemon_species: "pokemon-species",
+    stat: "stat",
+    type: "type",
+    language: "language",
+  }
 
   @typedoc """
   Identifier as `{id or name}` used in `https://pokeapi.co/api/v2/{resource}/{id or name}/`
@@ -90,251 +70,208 @@ defmodule MaxElixirPokeApi do
   @doc """
   Return a paginated list of available resources for that API. By default, a list "page" will contain up to 20 resources.
 
-  Check `MaxElixirPokeApi.Resource` module for examples.
-
   ## Parameters
 
     - **name:** `Atom` [`api_resource`] that represents the resource from Poke API.
   """
-  @spec resource(api_resource, integer, integer) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def resource(name, limit \\ 20, page \\ 0), do: Resource.get(name, limit, page)
+  @spec resource(atom, integer, integer) :: response
+  def resource(name, limit \\ 20, page \\ 0), do: Request.get(@resources_list[name], limit, page)
 
   @doc """
   Return a Berry.
-
-  Check `MaxElixirPokeApi.Berry` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/berry/{id or name}/`
   """
-  @spec berry(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def berry(id_or_name), do: Berry.get(id_or_name)
+  @spec berry(id_or_name) :: response
+  def berry(id_or_name), do: Request.get(@resources_list[:berry], id_or_name)
 
   @doc """
   Return a Berry Firmness.
-
-  Check `MaxElixirPokeApi.BerryFirmness` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/berry-firmness/{id or name}/`
   """
-  @spec berry_firmness(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def berry_firmness(id_or_name), do: BerryFirmness.get(id_or_name)
+  @spec berry_firmness(id_or_name) :: response
+  def berry_firmness(id_or_name), do: Request.get(@resources_list[:berry_firmness], id_or_name)
 
   @doc """
   Return a Berry Flavor.
-
-  Check `MaxElixirPokeApi.BerryFlavor` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/berry-flavor/{id or name}/`
   """
-  @spec berry_flavor(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def berry_flavor(id_or_name), do: BerryFlavor.get(id_or_name)
+  @spec berry_flavor(id_or_name) :: response
+  def berry_flavor(id_or_name), do: Request.get(@resources_list[:berry_flavor], id_or_name)
 
   @doc """
   Return a Contest Type.
-
-  Check `MaxElixirPokeApi.ContestType` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/contest-type/{id or name}/`
   """
-  @spec contest_type(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def contest_type(id_or_name), do: ContestType.get(id_or_name)
+  @spec contest_type(id_or_name) :: response
+  def contest_type(id_or_name), do: Request.get(@resources_list[:contest_type], id_or_name)
 
   @doc """
   Return a Contest Effect.
-
-  Check `MaxElixirPokeApi.ContestEffect` module for examples.
 
   ## Parameters
 
     - **id:** `Integer` that represents the resource identify. `https://pokeapi.co/api/v2/contest-effect/{id}/`
   """
-  @spec contest_effect(integer) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def contest_effect(id), do: ContestEffect.get(id)
+  @spec contest_effect(integer) :: response
+  def contest_effect(id) when is_integer(id), do: Request.get(@resources_list[:contest_effect], id)
 
   @doc """
   Return a Contest Contest Effect.
-
-  Check `MaxElixirPokeApi.SuperContestEffect` module for examples.
 
   ## Parameters
 
     - **id:** `Integer` that represents the resource identify. `https://pokeapi.co/api/v2/super-contest-effect/{id}/`
   """
-  @spec super_contest_effect(integer) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def super_contest_effect(id), do: SuperContestEffect.get(id)
+  @spec super_contest_effect(integer) :: response
+  def super_contest_effect(id) when is_integer(id), do: Request.get(@resources_list[:super_contest_effect], id)
 
   @doc """
   Return a Encounter Method.
-
-  Check `MaxElixirPokeApi.EncounterMethod` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/encounter-method/{id or name}/`
   """
-  @spec encounter_method(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def encounter_method(id_or_name), do: EncounterMethod.get(id_or_name)
+  @spec encounter_method(id_or_name) :: response
+  def encounter_method(id_or_name), do: Request.get(@resources_list[:encounter_method], id_or_name)
 
   @doc """
   Return a Encounter Condition.
-
-  Check `MaxElixirPokeApi.EncounterCondition` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/encounter-condition/{id or name}/`
   """
-  @spec encounter_condition(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def encounter_condition(id_or_name), do: EncounterCondition.get(id_or_name)
+  @spec encounter_condition(id_or_name) :: response
+  def encounter_condition(id_or_name), do: Request.get(@resources_list[:encounter_condition], id_or_name)
 
   @doc """
   Return a Encounter Condition Value.
-
-  Check `MaxElixirPokeApi.EncounterConditionValue` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/encounter-condition-value/{id or name}/`
   """
-  @spec encounter_condition_value(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def encounter_condition_value(id_or_name), do: EncounterConditionValue.get(id_or_name)
+  @spec encounter_condition_value(id_or_name) :: response
+  def encounter_condition_value(id_or_name), do: Request.get(@resources_list[:encounter_condition_value], id_or_name)
 
   @doc """
   Return a Evolution Chain.
 
-  Check `MaxElixirPokeApi.EvolutionChain` module for examples.
-
   ## Parameters
 
     - **id:** `Integer` that represents the resource identify. `https://pokeapi.co/api/v2/evolution-chain/{id}/`
-
   """
-  @spec evolution_chain(integer) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def evolution_chain(id), do: EvolutionChain.get(id)
+  @spec evolution_chain(integer) :: response
+  def evolution_chain(id) when is_integer(id), do: Request.get(@resources_list[:evolution_chain], id)
 
    @doc """
   Return a Evolution Trigger.
-
-  Check `MaxElixirPokeApi.EvolutionTrigger` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/evolution-trigger/{id or name}/`
   """
-  @spec evolution_trigger(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def evolution_trigger(id_or_name), do: EvolutionTrigger.get(id_or_name)
+  @spec evolution_trigger(id_or_name) :: response
+  def evolution_trigger(id_or_name), do: Request.get(@resources_list[:evolution_trigger], id_or_name)
 
   @doc """
   Return a Generation.
-
-  Check `MaxElixirPokeApi.Generation` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/generation/{id or name}/`
   """
-  @spec generation(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def generation(id_or_name), do: Generation.get(id_or_name)
+  @spec generation(id_or_name) :: response
+  def generation(id_or_name), do: Request.get(@resources_list[:generation], id_or_name)
 
   @doc """
   Return a Pokedex.
-
-  Check `MaxElixirPokeApi.Pokedex` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/pokedex/{id or name}/`
   """
-  @spec pokedex(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def pokedex(id_or_name), do: Pokedex.get(id_or_name)
+  @spec pokedex(id_or_name) :: response
+  def pokedex(id_or_name), do: Request.get(@resources_list[:pokedex], id_or_name)
 
   @doc """
   Return a Version.
-
-  Check `MaxElixirPokeApi.Version` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/version/{id or name}/`
   """
-  @spec version(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def version(id_or_name), do: Version.get(id_or_name)
+  @spec version(id_or_name) :: response
+  def version(id_or_name), do: Request.get(@resources_list[:version], id_or_name)
 
   @doc """
   Return a Version Group.
-
-  Check `MaxElixirPokeApi.Version` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/version-group/{id or name}/`
   """
-  @spec version_group(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def version_group(id_or_name), do: VersionGroup.get(id_or_name)
+  @spec version_group(id_or_name) :: response
+  def version_group(id_or_name), do: Request.get(@resources_list[:version_group], id_or_name)
 
   @doc """
   Return a Item.
-
-  Check `MaxElixirPokeApi.Item` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item/{id or name}/`
   """
-  @spec item(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def item(id_or_name), do: Item.get(id_or_name)
+  @spec item(id_or_name) :: response
+  def item(id_or_name), do: Request.get(@resources_list[:item], id_or_name)
 
   @doc """
   Return a Item Attribute.
-
-  Check `MaxElixirPokeApi.ItemAttribute` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-attribute/{id or name}/`
   """
-  @spec item_attribute(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def item_attribute(id_or_name), do: ItemAttribute.get(id_or_name)
+  @spec item_attribute(id_or_name) :: response
+  def item_attribute(id_or_name), do: Request.get(@resources_list[:item_attribute], id_or_name)
 
   @doc """
   Return a Item Category.
-
-  Check `MaxElixirPokeApi.ItemCategory` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-category/{id or name}/`
   """
-  @spec item_category(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def item_category(id_or_name), do: ItemCategory.get(id_or_name)
+  @spec item_category(id_or_name) :: response
+  def item_category(id_or_name), do: Request.get(@resources_list[:item_category], id_or_name)
 
   @doc """
   Return a Item Fling Effect.
-
-  Check `MaxElixirPokeApi.ItemFlingEffect` module for examples.
 
   ## Parameters
 
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-fling-effect/{id or name}/`
   """
-  @spec item_fling_effect(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def item_fling_effect(id_or_name), do: ItemFlingEffect.get(id_or_name)
+  @spec item_fling_effect(id_or_name) :: response
+  def item_fling_effect(id_or_name), do: Request.get(@resources_list[:item_fling_effect], id_or_name)
 
   @doc """
   Return a Item Pocket.
-
   ## Parameters
-
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-pocket/{id or name}/`
   """
-  @spec item_pocket(id_or_name) :: {:ok, map} | {:error, %{reason: String.t()}}
-  def item_pocket(id_or_name), do: ItemPocket.get(id_or_name)
+  @spec item_pocket(id_or_name) :: response
+  def item_pocket(id_or_name), do: Request.get(@resources_list[:item_pocket], id_or_name)
 end
