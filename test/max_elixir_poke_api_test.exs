@@ -697,4 +697,25 @@ defmodule MaxElixirPokeApiTest do
       assert catch_error(MaxElixirPokeApi.region(:banana)) == :function_clause
     end
   end
+
+  describe "machine/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.machine(1)
+      assert resource["id"] |> is_integer
+      assert resource["item"] |> is_map
+      assert resource["move"] |> is_map
+      assert resource["version_group"] |> is_map
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.machine(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.machine(:banana)) == :function_clause
+    end
+  end
 end
