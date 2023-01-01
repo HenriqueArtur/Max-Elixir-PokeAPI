@@ -329,4 +329,15 @@ defmodule MaxElixirPokeApi do
   def location(id_or_name)
     when is_bitstring(id_or_name) or is_integer(id_or_name),
     do: Request.get(@resources_list[:location], id_or_name)
+
+  @doc """
+  Location areas are sections of areas, such as floors in a building or cave. Each area has its own set of possible Pokémon encounters.
+
+  ## Parameters
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def location_area(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:location_area], id_or_name)
 end
