@@ -351,4 +351,15 @@ defmodule MaxElixirPokeApi do
   def pal_park_area(id_or_name)
     when is_bitstring(id_or_name) or is_integer(id_or_name),
     do: Request.get(@resources_list[:pal_park_area], id_or_name)
+
+  @doc """
+  A region is an organized area of the Pokémon world. Most often, the main difference between regions is the species of Pokémon that can be encountered within them.
+
+  ## Parameters
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def region(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:region], id_or_name)
 end
