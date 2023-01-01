@@ -720,7 +720,7 @@ defmodule MaxElixirPokeApiTest do
   end
 
   describe "move/1" do
-    # @tag :not_runnable
+    @tag :not_runnable
     test "success" do
       { :ok, resource } = MaxElixirPokeApi.move("pound")
       assert resource["id"] |> is_integer
@@ -749,19 +749,45 @@ defmodule MaxElixirPokeApiTest do
       assert resource["type"] |> is_map
     end
 
-    # @tag :not_runnable
+    @tag :not_runnable
     test "name not found" do
       assert MaxElixirPokeApi.move("banana") == {:error, %{reason: "HTTP Status '404'"}}
     end
 
-    # @tag :not_runnable
+    @tag :not_runnable
     test "id not found" do
       assert MaxElixirPokeApi.move(9999) == {:error, %{reason: "HTTP Status '404'"}}
     end
 
-    # @tag :not_runnable
+    @tag :not_runnable
     test "datatype invalid [atom]" do
       assert catch_error(MaxElixirPokeApi.move(:banana)) == :function_clause
+    end
+  end
+
+  describe "move_ailment/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.move_ailment("paralysis")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["moves"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.move_ailment("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.move_ailment(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.move_ailment(:banana)) == :function_clause
     end
   end
 end
