@@ -868,4 +868,31 @@ defmodule MaxElixirPokeApiTest do
       assert catch_error(MaxElixirPokeApi.move_damage_class(:banana)) == :function_clause
     end
   end
+
+  describe "move_learn_method/1" do
+    # @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.move_learn_method("level-up")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["version_groups"] |> is_list
+      assert resource["descriptions"] |> is_list
+    end
+
+    # @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.move_learn_method("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    # @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.move_learn_method(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    # @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.move_learn_method(:banana)) == :function_clause
+    end
+  end
 end
