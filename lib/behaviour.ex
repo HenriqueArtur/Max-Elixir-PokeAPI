@@ -38,4 +38,11 @@ defmodule MaxElixirPokeApi.Behaviour do
   @callback pal_park_area(id_or_name) :: response
   @callback region(id_or_name) :: response
   @callback machine(integer) :: response
+  @callback move(id_or_name) :: response
+  @callback move_ailment(id_or_name) :: response
+  @callback move_battle_style(id_or_name) :: response
+  @callback move_category(id_or_name) :: response
+  @callback move_damage_class(id_or_name) :: response
+  @callback move_learn_method(id_or_name) :: response
+  @callback move_target(id_or_name) :: response
 end
