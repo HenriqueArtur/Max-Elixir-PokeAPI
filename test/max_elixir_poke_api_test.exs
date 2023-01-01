@@ -718,4 +718,50 @@ defmodule MaxElixirPokeApiTest do
       assert catch_error(MaxElixirPokeApi.machine(:banana)) == :function_clause
     end
   end
+
+  describe "move/1" do
+    # @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.move("pound")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["accuracy"] |> is_integer
+      assert resource["effect_chance"] |> is_integer_or_nil
+      assert resource["pp"] |> is_integer
+      assert resource["priority"] |> is_integer
+      assert resource["power"] |> is_integer
+      assert resource["contest_combos"] |> is_map
+      assert resource["contest_type"] |> is_map
+      assert resource["contest_effect"] |> is_map
+      assert resource["damage_class"] |> is_map
+      assert resource["effect_entries"] |> is_list
+      assert resource["effect_changes"] |> is_list
+      assert resource["learned_by_pokemon"] |> is_list
+      assert resource["flavor_text_entries"] |> is_list
+      assert resource["generation"] |> is_map
+      assert resource["machines"] |> is_list
+      assert resource["meta"] |> is_map
+      assert resource["past_values"] |> is_list
+      assert resource["stat_changes"] |> is_list
+      assert resource["super_contest_effect"] |> is_map
+      assert resource["target"] |> is_map
+      assert resource["type"] |> is_map
+    end
+
+    # @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.move("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    # @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.move(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    # @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.move(:banana)) == :function_clause
+    end
+  end
 end

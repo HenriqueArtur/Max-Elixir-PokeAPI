@@ -374,4 +374,16 @@ defmodule MaxElixirPokeApi do
   def machine(id)
     when is_integer(id),
     do: Request.get(@resources_list[:machine], id)
+
+  @doc """
+  Moves are the skills of Pokémon in battle. In battle, a Pokémon uses one move each turn. Some moves (including those learned by Hidden Machine) can be used outside of battle as well, usually for the purpose of removing obstacles or exploring new areas.
+
+  ## Parameters
+
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def move(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:move], id_or_name)
 end
