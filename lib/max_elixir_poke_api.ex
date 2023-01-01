@@ -310,6 +310,7 @@ defmodule MaxElixirPokeApi do
 
   @doc """
   Return a Item Pocket.
+
   ## Parameters
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-pocket/{id or name}/`
   """
@@ -317,4 +318,15 @@ defmodule MaxElixirPokeApi do
   def item_pocket(id_or_name)
     when is_bitstring(id_or_name) or is_integer(id_or_name),
     do: Request.get(@resources_list[:item_pocket], id_or_name)
+
+  @doc """
+  Locations that can be visited within the games. Locations make up sizable portions of regions, like cities or routes.
+
+  ## Parameters
+    - **id_or_name:** `Integer` or `String` that represents the resource identify.
+  """
+  @impl Behaviour
+  def location(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:location], id_or_name)
 end
