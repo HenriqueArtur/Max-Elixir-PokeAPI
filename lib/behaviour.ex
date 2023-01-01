@@ -33,4 +33,8 @@ defmodule MaxElixirPokeApi.Behaviour do
   @callback item_category(id_or_name) :: response
   @callback item_fling_effect(id_or_name) :: response
   @callback item_pocket(id_or_name) :: response
+  @callback location(id_or_name) :: response
+  @callback location_area(id_or_name) :: response
+  @callback pal_park_area(id_or_name) :: response
+  @callback region(id_or_name) :: response
 end
