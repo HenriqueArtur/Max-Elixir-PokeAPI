@@ -362,4 +362,16 @@ defmodule MaxElixirPokeApi do
   def region(id_or_name)
     when is_bitstring(id_or_name) or is_integer(id_or_name),
     do: Request.get(@resources_list[:region], id_or_name)
+
+  @doc """
+  Machines are the representation of items that teach moves to Pokémon. They vary from version to version, so it is not certain that one specific TM or HM corresponds to a single Machine.
+
+  ## Parameters
+
+    - **id:** `Integer` that represents the resource identify.
+  """
+  @impl Behaviour
+  def machine(id)
+    when is_integer(id),
+    do: Request.get(@resources_list[:machine], id)
 end
