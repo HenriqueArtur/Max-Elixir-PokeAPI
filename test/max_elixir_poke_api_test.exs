@@ -2,7 +2,8 @@ defmodule MaxElixirPokeApiTest do
   use ExUnit.Case, async: true
   doctest MaxElixirPokeApi
 
-  def is_bitstring_or_nil(value), do: is_bitstring(value) or is_nil(value)
+  defp is_bitstring_or_nil(value), do: is_bitstring(value) or is_nil(value)
+  defp is_map_or_nil(value), do: is_map(value) or is_nil(value)
 
   describe "resource/3" do
     test "success NOT paginate" do
@@ -238,4 +239,45 @@ defmodule MaxElixirPokeApiTest do
       assert catch_error(MaxElixirPokeApi.encounter_condition_value(:banana)) == :function_clause
     end
   end
+
+  describe "evolution_chain/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.evolution_chain(1)
+      assert resource["id"] |> is_integer
+      assert resource["chain"] |> is_map
+      assert resource["baby_trigger_item"] |> is_map_or_nil
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.evolution_chain(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.evolution_chain(:banana)) == :function_clause
+    end
+  end
+
+  describe "evolution_trigger/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.evolution_trigger("trade")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["pokemon_species"] |> is_list
+    end
+
+    test "name not found" do
+      assert MaxElixirPokeApi.evolution_trigger("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.evolution_trigger(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.evolution_trigger(:banana)) == :function_clause
+    end
+  end
+
+  describe "generation/1" do
 end
