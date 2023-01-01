@@ -340,4 +340,15 @@ defmodule MaxElixirPokeApi do
   def location_area(id_or_name)
     when is_bitstring(id_or_name) or is_integer(id_or_name),
     do: Request.get(@resources_list[:location_area], id_or_name)
+
+  @doc """
+  Areas used for grouping Pokémon encounters in Pal Park. They're like habitats that are specific to [Pal Park](https://bulbapedia.bulbagarden.net/wiki/Pal_Park).
+
+  ## Parameters
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def pal_park_area(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:pal_park_area], id_or_name)
 end
