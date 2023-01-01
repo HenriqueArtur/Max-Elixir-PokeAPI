@@ -613,4 +613,33 @@ defmodule MaxElixirPokeApiTest do
       assert catch_error(MaxElixirPokeApi.location(:banana)) == :function_clause
     end
   end
+
+  describe "location_area/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.location_area("canalave-city-area")
+      assert resource["id"] |> is_integer
+      assert resource["game_index"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["encounter_method_rates"] |> is_list
+      assert resource["location"] |> is_map
+      assert resource["pokemon_encounters"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.location_area("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.location_area(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.location_area(:banana)) == :function_clause
+    end
+  end
 end
