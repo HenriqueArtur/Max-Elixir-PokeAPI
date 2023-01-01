@@ -446,4 +446,16 @@ defmodule MaxElixirPokeApi do
   def move_learn_method(id_or_name)
     when is_bitstring(id_or_name) or is_integer(id_or_name),
     do: Request.get(@resources_list[:move_learn_method], id_or_name)
+
+  @doc """
+  Targets moves can be directed at during battle. Targets can be Pokémon, environments or even other moves.
+
+  ## Parameters
+
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def move_target(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:move_target], id_or_name)
 end
