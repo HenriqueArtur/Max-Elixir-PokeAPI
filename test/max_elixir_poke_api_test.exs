@@ -642,4 +642,30 @@ defmodule MaxElixirPokeApiTest do
       assert catch_error(MaxElixirPokeApi.location_area(:banana)) == :function_clause
     end
   end
+
+  describe "pal_park_area/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.pal_park_area("forest")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["pokemon_encounters"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.pal_park_area("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.pal_park_area(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.pal_park_area(:banana)) == :function_clause
+    end
+  end
 end
