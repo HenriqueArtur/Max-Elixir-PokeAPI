@@ -200,7 +200,7 @@ defmodule MaxElixirPokeApi do
     when is_integer(id),
     do: Request.get(@resources_list[:evolution_chain], id)
 
-   @doc """
+  @doc """
   Return a Evolution Trigger.
 
   ## Parameters
