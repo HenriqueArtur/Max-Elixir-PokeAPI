@@ -280,4 +280,104 @@ defmodule MaxElixirPokeApiTest do
   end
 
   describe "generation/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.generation("generation-i")
+      assert resource["abilities"] |> is_list
+      assert resource["id"] |> is_integer
+      assert resource["main_region"] |> is_map
+      assert resource["moves"] |> is_list
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["pokemon_species"] |> is_list
+      assert resource["types"] |> is_list
+      assert resource["version_groups"] |> is_list
+    end
+
+    test "name not found" do
+      assert MaxElixirPokeApi.generation("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.generation(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.generation(:banana)) == :function_clause
+    end
+  end
+
+  describe "pokedex/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.pokedex("kanto")
+      assert resource["descriptions"] |> is_list
+      assert resource["id"] |> is_integer
+      assert resource["is_main_series"] |> is_boolean
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["pokemon_entries"] |> is_list
+      assert resource["region"] |> is_map
+      assert resource["version_groups"] |> is_list
+    end
+
+    test "name not found" do
+      assert MaxElixirPokeApi.pokedex("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.pokedex(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.pokedex(:banana)) == :function_clause
+    end
+  end
+
+  describe "version/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.version("red")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["version_group"] |> is_map
+    end
+
+    test "name not found" do
+      assert MaxElixirPokeApi.version("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.version(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.version(:banana)) == :function_clause
+    end
+  end
+
+  describe "version_group/1" do
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.version_group("red-blue")
+      assert resource["id"] |> is_integer
+      assert resource["order"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["versions"] |> is_list
+      assert resource["generation"] |> is_map
+      assert resource["move_learn_methods"] |> is_list
+      assert resource["pokedexes"] |> is_list
+      assert resource["regions"] |> is_list
+      assert resource["versions"] |> is_list
+    end
+
+    test "name not found" do
+      assert MaxElixirPokeApi.version_group("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "id not found" do
+      assert MaxElixirPokeApi.version_group(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.version_group(:banana)) == :function_clause
+    end
+  end
 end
