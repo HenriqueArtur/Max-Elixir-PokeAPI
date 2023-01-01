@@ -790,4 +790,29 @@ defmodule MaxElixirPokeApiTest do
       assert catch_error(MaxElixirPokeApi.move_ailment(:banana)) == :function_clause
     end
   end
+
+  describe "move_battle_style/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.move_battle_style("attack")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.move_battle_style("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.move_battle_style(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.move_battle_style(:banana)) == :function_clause
+    end
+  end
 end
