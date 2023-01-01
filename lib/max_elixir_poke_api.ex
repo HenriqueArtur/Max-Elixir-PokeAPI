@@ -36,7 +36,7 @@ defmodule MaxElixirPokeApi do
     item: "item",
     item_attribute: "item-attribute",
     item_category: "item-category",
-    item_fling_effect: "item_fling-effect",
+    item_fling_effect: "item-fling-effect",
     item_pocket: "item-pocket",
     location: "location",
     location_area: "location-area",
