@@ -424,7 +424,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:move_category], id_or_name)
 
   @doc """
-  Very general categories that loosely group move effects.
+  Damage classes moves can have, e.g. physical, special, or non-damaging.
 
   ## Parameters
 
@@ -434,4 +434,16 @@ defmodule MaxElixirPokeApi do
   def move_damage_class(id_or_name)
     when is_bitstring(id_or_name) or is_integer(id_or_name),
     do: Request.get(@resources_list[:move_damage_class], id_or_name)
+
+  @doc """
+  Methods by which Pokémon can learn moves.
+
+  ## Parameters
+
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def move_learn_method(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:move_learn_method], id_or_name)
 end
