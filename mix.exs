@@ -33,7 +33,8 @@ defmodule MaxElixirPokeApi.MixProject do
     [
       {:httpoison, "~> 1.7"},
       {:jason, "~> 1.2"},
-      {:ex_doc, "~> 0.27", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
+      {:cachex, "~> 3.4"}
     ]
   end
 end
