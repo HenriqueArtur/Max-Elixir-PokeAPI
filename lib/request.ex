@@ -13,11 +13,20 @@ defmodule MaxElixirPokeApi.Request do
   @spec get(String.t(), integer, integer) :: response
   def get(resource, limit, page) do
     if resource do
-      resource
-      |> make_url(limit, page)
-      |> client_get
-      |> response
-      |> decode
+      case Cachex.exists?(:max_elixir_cache, resource) do
+        {:ok, true} ->
+          {:ok, value} = Cachex.get(:max_elixir_cache, resource)
+          value
+        {:ok, false} ->
+          resource
+          |> make_url(limit, page)
+          |> client_get
+          |> response
+          |> decode
+          |> save_cache(resource)
+        {:error, :no_cache} ->
+          {:error, "cache not initiate"}
+      end
     else
       {:error, %{reason: "resource not valid."}}
     end
@@ -28,11 +37,21 @@ defmodule MaxElixirPokeApi.Request do
   """
   @spec get(String.t(), id_or_name) :: response
   def get(resource, id_or_name) do
-    resource
-    |> make_url(id_or_name)
-    |> client_get
-    |> response
-    |> decode
+    key = "#{resource}-#{id_or_name}"
+    case Cachex.exists?(:max_elixir_cache, key) do
+      {:ok, true} ->
+        {:ok, value} = Cachex.get(:max_elixir_cache, key)
+        value
+      {:ok, false} ->
+        resource
+        |> make_url(id_or_name)
+        |> client_get
+        |> response
+        |> decode
+        |> save_cache(key)
+      {:error, :no_cache} ->
+        {:error, "cache not initiate"}
+    end
   end
 
   @doc false
@@ -50,4 +69,10 @@ defmodule MaxElixirPokeApi.Request do
   @doc false
   defp decode({:error, _reason} = response), do: response
   defp decode({:ok, body}), do: {:ok, Jason.decode!(body)}
+
+  @doc false
+  defp save_cache(resource, key) do
+    Cachex.put(:max_elixir_cache, key, resource)
+    resource
+  end
 end
