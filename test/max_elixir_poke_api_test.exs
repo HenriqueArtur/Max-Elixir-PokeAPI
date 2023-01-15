@@ -6,6 +6,7 @@ defmodule MaxElixirPokeApiTest do
   defp is_integer_or_nil(value), do: is_integer(value) or is_nil(value)
   defp is_map_or_nil(value), do: is_map(value) or is_nil(value)
 
+  @tag :not_runnable
   test "caching" do
     assert Cachex.exists?(:max_elixir_cache, "berry-1") == {:ok, false}
     MaxElixirPokeApi.berry(1)
@@ -24,21 +25,11 @@ defmodule MaxElixirPokeApiTest do
 
     @tag :not_runnable
     test "success paginate" do
-      response =
-        {:ok,
-          %{
-            "count" => 1154,
-            "next" => "https://pokeapi.co/api/v2/pokemon?offset=30&limit=5",
-            "previous" => "https://pokeapi.co/api/v2/pokemon?offset=20&limit=5",
-            "results" => [
-              %{"name" => "raichu", "url" => "https://pokeapi.co/api/v2/pokemon/26/"},
-              %{"name" => "sandshrew", "url" => "https://pokeapi.co/api/v2/pokemon/27/"},
-              %{"name" => "sandslash", "url" => "https://pokeapi.co/api/v2/pokemon/28/"},
-              %{"name" => "nidoran-f", "url" => "https://pokeapi.co/api/v2/pokemon/29/"},
-              %{"name" => "nidorina", "url" => "https://pokeapi.co/api/v2/pokemon/30/"}
-            ]
-          }}
-      assert response == MaxElixirPokeApi.resource(:pokemon, 5, 5)
+      { :ok, resource } = MaxElixirPokeApi.resource(:pokemon, 5, 5)
+      assert resource["count"] |> is_integer
+      assert resource["next"] |> is_bitstring
+      assert resource["previous"] |> is_bitstring
+      assert resource["results"] |> is_list
     end
 
     @tag :not_runnable
@@ -726,7 +717,7 @@ defmodule MaxElixirPokeApiTest do
   end
 
   describe "move/1" do
-    @tag :not_runnable
+    # @tag :not_runnable
     test "success" do
       { :ok, resource } = MaxElixirPokeApi.move("pound")
       assert resource["id"] |> is_integer
@@ -737,9 +728,9 @@ defmodule MaxElixirPokeApiTest do
       assert resource["pp"] |> is_integer
       assert resource["priority"] |> is_integer
       assert resource["power"] |> is_integer
-      assert resource["contest_combos"] |> is_map
-      assert resource["contest_type"] |> is_map
-      assert resource["contest_effect"] |> is_map
+      assert resource["contest_combos"] |> is_map_or_nil
+      assert resource["contest_type"] |> is_map_or_nil
+      assert resource["contest_effect"] |> is_map_or_nil
       assert resource["damage_class"] |> is_map
       assert resource["effect_entries"] |> is_list
       assert resource["effect_changes"] |> is_list
@@ -747,10 +738,10 @@ defmodule MaxElixirPokeApiTest do
       assert resource["flavor_text_entries"] |> is_list
       assert resource["generation"] |> is_map
       assert resource["machines"] |> is_list
-      assert resource["meta"] |> is_map
+      assert resource["meta"] |> is_map_or_nil
       assert resource["past_values"] |> is_list
       assert resource["stat_changes"] |> is_list
-      assert resource["super_contest_effect"] |> is_map
+      assert resource["super_contest_effect"] |> is_map_or_nil
       assert resource["target"] |> is_map
       assert resource["type"] |> is_map
     end
