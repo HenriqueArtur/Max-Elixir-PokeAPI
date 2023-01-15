@@ -24,8 +24,6 @@ defmodule MaxElixirPokeApi.Request do
           |> response
           |> decode
           |> save_cache(resource)
-        {:error, :no_cache} ->
-          {:error, "cache not initiate"}
       end
     else
       {:error, %{reason: "resource not valid."}}
@@ -49,8 +47,6 @@ defmodule MaxElixirPokeApi.Request do
         |> response
         |> decode
         |> save_cache(key)
-      {:error, :no_cache} ->
-        {:error, "cache not initiate"}
     end
   end
 
