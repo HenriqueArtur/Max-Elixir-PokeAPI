@@ -463,7 +463,7 @@ defmodule MaxElixirPokeApiTest do
 
     @tag :not_runnable
     test "name not found" do
-      assert MaxElixirPokeApi.item("banana") == {:error, %{reason: "HTTP Status '404'"}}
+      assert MaxElixirPokeApi.item("laranja") == {:error, %{reason: "HTTP Status '404'"}}
     end
 
     @tag :not_runnable
@@ -717,7 +717,7 @@ defmodule MaxElixirPokeApiTest do
   end
 
   describe "move/1" do
-    # @tag :not_runnable
+    @tag :not_runnable
     test "success" do
       { :ok, resource } = MaxElixirPokeApi.move("pound")
       assert resource["id"] |> is_integer
@@ -1147,6 +1147,230 @@ defmodule MaxElixirPokeApiTest do
     @tag :not_runnable
     test "datatype invalid [atom]" do
       assert catch_error(MaxElixirPokeApi.pokemon(:banana)) == :function_clause
+    end
+  end
+
+  describe "pokemon_color/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.pokemon_color("black")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["pokemon_species"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.pokemon_color("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.pokemon_color(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.pokemon_color(:banana)) == :function_clause
+    end
+  end
+
+  describe "pokemon_form/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.pokemon_form("arceus-bug")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["order"] |> is_integer
+      assert resource["form_order"] |> is_integer
+      assert resource["is_default"] |> is_boolean
+      assert resource["is_battle_only"] |> is_boolean
+      assert resource["is_mega"] |> is_boolean
+      assert resource["form_name"] |> is_bitstring
+      assert resource["pokemon"] |> is_map
+      assert resource["sprites"] |> is_map
+      assert resource["types"] |> is_list
+      assert resource["version_group"] |> is_map
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.pokemon_form("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.pokemon_form(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.pokemon_form(:banana)) == :function_clause
+    end
+  end
+
+  describe "pokemon_habitat/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.pokemon_habitat("cave")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["pokemon_species"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.pokemon_habitat("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.pokemon_habitat(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.pokemon_habitat(:banana)) == :function_clause
+    end
+  end
+
+  describe "pokemon_shape/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.pokemon_shape("ball")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["pokemon_species"] |> is_list
+      assert resource["awesome_names"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.pokemon_shape("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.pokemon_shape(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.pokemon_shape(:banana)) == :function_clause
+    end
+  end
+
+  describe "pokemon_species/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.pokemon_species("wormadam")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["order"] |> is_integer
+      assert resource["gender_rate"] |> is_integer
+      assert resource["capture_rate"] |> is_integer
+      assert resource["base_happiness"] |> is_integer
+      assert resource["is_baby"] |> is_boolean
+      assert resource["is_legendary"] |> is_boolean
+      assert resource["is_mythical"] |> is_boolean
+      assert resource["hatch_counter"] |> is_integer
+      assert resource["has_gender_differences"] |> is_boolean
+      assert resource["forms_switchable"] |> is_boolean
+      assert resource["growth_rate"] |> is_map
+      assert resource["pokedex_numbers"] |> is_list
+      assert resource["egg_groups"] |> is_list
+      assert resource["color"] |> is_map
+      assert resource["shape"] |> is_map
+      assert resource["evolves_from_species"] |> is_map
+      assert resource["evolution_chain"] |> is_map
+      assert resource["habitat"] |> is_map_or_nil
+      assert resource["generation"] |> is_map
+      assert resource["flavor_text_entries"] |> is_list
+      assert resource["form_descriptions"] |> is_list
+      assert resource["genera"] |> is_list
+      assert resource["varieties"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.pokemon_species("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.pokemon_species(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.pokemon_species(:banana)) == :function_clause
+    end
+  end
+
+  describe "stat/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.stat("attack")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["game_index"] |> is_integer
+      assert resource["is_battle_only"] |> is_boolean
+      assert resource["affecting_moves"] |> is_map
+      assert resource["affecting_natures"] |> is_map
+      assert resource["characteristics"] |> is_list
+      assert resource["move_damage_class"] |> is_map
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.stat("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.stat(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.stat(:banana)) == :function_clause
+    end
+  end
+
+  describe "type/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.type("ground")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["damage_relations"] |> is_map
+      assert resource["past_damage_relations"] |> is_list
+      assert resource["game_indices"] |> is_list
+      assert resource["generation"] |> is_map
+      assert resource["move_damage_class"] |> is_map
+      assert resource["pokemon"] |> is_list
+      assert resource["moves"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.type("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.type(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.type(:banana)) == :function_clause
     end
   end
 end
