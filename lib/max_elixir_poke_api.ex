@@ -652,4 +652,16 @@ defmodule MaxElixirPokeApi do
   def type(id_or_name)
     when is_bitstring(id_or_name) or is_integer(id_or_name),
     do: Request.get(@resources_list[:type], id_or_name)
+
+  @doc """
+  Languages for translations of API resource information.
+
+  ## Parameters
+
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def language(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:language], id_or_name)
 end
