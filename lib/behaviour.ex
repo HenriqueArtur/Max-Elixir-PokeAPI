@@ -45,4 +45,19 @@ defmodule MaxElixirPokeApi.Behaviour do
   @callback move_damage_class(id_or_name) :: response
   @callback move_learn_method(id_or_name) :: response
   @callback move_target(id_or_name) :: response
+  @callback ability(id_or_name) :: response
+  @callback characteristic(integer) :: response
+  @callback egg_group(id_or_name) :: response
+  @callback gender(id_or_name) :: response
+  @callback growth_rate(id_or_name) :: response
+  @callback nature(id_or_name) :: response
+  @callback pokeathlon_stat(id_or_name) :: response
+  @callback pokemon(id_or_name) :: response
+  @callback pokemon_color(id_or_name) :: response
+  @callback pokemon_form(id_or_name) :: response
+  @callback pokemon_habitat(id_or_name) :: response
+  @callback pokemon_shape(id_or_name) :: response
+  @callback pokemon_species(id_or_name) :: response
+  @callback stat(id_or_name) :: response
+  @callback type(id_or_name) :: response
 end

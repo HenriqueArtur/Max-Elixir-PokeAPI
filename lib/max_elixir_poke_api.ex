@@ -472,4 +472,100 @@ defmodule MaxElixirPokeApi do
   def move_target(id_or_name)
     when is_bitstring(id_or_name) or is_integer(id_or_name),
     do: Request.get(@resources_list[:move_target], id_or_name)
+
+  @doc """
+  Abilities provide passive effects for Pokémon in battle or in the overworld. Pokémon have multiple possible abilities but can have only one ability at a time. Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Ability) for greater detail.
+
+  ## Parameters
+
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def ability(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:ability], id_or_name)
+
+  @doc """
+  Characteristics indicate which stat contains a Pokémon's highest IV. A Pokémon's Characteristic is determined by the remainder of its highest IV divided by 5 (gene_modulo). Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Characteristic) for greater detail.
+
+  ## Parameters
+
+    - **id:** `Integer` that represents the resource identify.
+  """
+  @impl Behaviour
+  def characteristic(id)
+    when is_integer(id),
+    do: Request.get(@resources_list[:characteristic], id)
+
+  @doc """
+  Egg Groups are categories which determine which Pokémon are able to interbreed. Pokémon may belong to either one or two Egg Groups. Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Egg_Group) for greater detail.
+
+  ## Parameters
+
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def egg_group(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:egg_group], id_or_name)
+
+  @doc """
+  Genders were introduced in Generation II for the purposes of breeding Pokémon but can also result in visual differences or even different evolutionary lines. Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Gender) for greater detail.
+
+  ## Parameters
+
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def gender(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:gender], id_or_name)
+
+  @doc """
+  Growth rates are the speed with which Pokémon gain levels through experience. Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Experience) for greater detail.
+
+  ## Parameters
+
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def growth_rate(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:growth_rate], id_or_name)
+
+  @doc """
+  Natures influence how a Pokémon's stats grow. See [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Nature) for greater detail.
+
+  ## Parameters
+
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def nature(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:nature], id_or_name)
+
+  @doc """
+  Pokeathlon Stats are different attributes of a Pokémon's performance in Pokéathlons. In Pokéathlons, competitions happen on different courses; one for each of the different Pokéathlon stats. See [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9athlon) for greater detail.
+
+  ## Parameters
+
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def pokeathlon_stat(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:pokeathlon_stat], id_or_name)
+
+  @doc """
+  Pokémon are the creatures that inhabit the world of the Pokémon games. They can be caught using Pokéballs and trained by battling with other Pokémon. Each Pokémon belongs to a specific species but may take on a variant which makes it differ from other Pokémon of the same species, such as base stats, available abilities and typings. See [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_(species)) for greater detail.
+
+  ## Parameters
+
+    - **id_or_name:** `t:id_or_name/0`
+  """
+  @impl Behaviour
+  def pokemon(id_or_name)
+    when is_bitstring(id_or_name) or is_integer(id_or_name),
+    do: Request.get(@resources_list[:pokemon], id_or_name)
 end
