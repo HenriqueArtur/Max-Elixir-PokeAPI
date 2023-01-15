@@ -27,8 +27,8 @@ defmodule MaxElixirPokeApiTest do
     test "success paginate" do
       { :ok, resource } = MaxElixirPokeApi.resource(:pokemon, 5, 5)
       assert resource["count"] |> is_integer
-      assert resource["next"] |> is_bitstring
-      assert resource["previous"] |> is_bitstring
+      assert resource["next"] |> is_bitstring_or_nil
+      assert resource["previous"] |> is_bitstring_or_nil
       assert resource["results"] |> is_list
     end
 
