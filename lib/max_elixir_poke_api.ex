@@ -95,7 +95,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[name], limit, page)
 
   @doc """
-  Return a Berry.
+  Berries are small fruits that can provide HP and status condition restoration, stat enhancement, and even damage negation when eaten by Pokémon. Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Berry) for greater detail.
 
   ## Parameters
 
@@ -107,7 +107,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:berry], id_or_name)
 
   @doc """
-  Return a Berry Firmness.
+  Berries can be soft or hard. Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Category:Berries_by_firmness) for greater detail.
 
   ## Parameters
 
@@ -119,7 +119,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:berry_firmness], id_or_name)
 
   @doc """
-  Return a Berry Flavor.
+  Flavors determine whether a Pokémon will benefit or suffer from eating a berry based on their nature. Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Flavor) for greater detail.
 
   ## Parameters
 
@@ -131,7 +131,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:berry_flavor], id_or_name)
 
   @doc """
-  Return a Contest Type.
+  Contest types are categories judges used to weigh a Pokémon's condition in Pokémon contests. Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Contest_condition) for greater detail.
 
   ## Parameters
 
@@ -143,7 +143,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:contest_type], id_or_name)
 
   @doc """
-  Return a Contest Effect.
+  Contest effects refer to the effects of moves when used in contests.
 
   ## Parameters
 
@@ -155,7 +155,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:contest_effect], id)
 
   @doc """
-  Return a Contest Contest Effect.
+  Super contest effects refer to the effects of moves when used in super contests.
 
   ## Parameters
 
@@ -167,7 +167,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:super_contest_effect], id)
 
   @doc """
-  Return a Encounter Method.
+  Methods by which the player might can encounter Pokémon in the wild, e.g., walking in tall grass. Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Wild_Pok%C3%A9mon) for greater detail.
 
   ## Parameters
 
@@ -179,7 +179,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:encounter_method], id_or_name)
 
   @doc """
-  Return a Encounter Condition.
+  Conditions which affect what pokemon might appear in the wild, e.g., day or night.
 
   ## Parameters
 
@@ -191,7 +191,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:encounter_condition], id_or_name)
 
   @doc """
-  Return a Encounter Condition Value.
+  Encounter condition values are the various states that an encounter condition can have, i.e., time of day can be either day or night.
 
   ## Parameters
 
@@ -203,7 +203,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:encounter_condition_value], id_or_name)
 
   @doc """
-  Return a Evolution Chain.
+  Evolution chains are essentially family trees. They start with the lowest stage within a family and detail evolution conditions for each as well as Pokémon they can evolve into up through the hierarchy.
 
   ## Parameters
 
@@ -215,7 +215,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:evolution_chain], id)
 
   @doc """
-  Return a Evolution Trigger.
+  Evolution triggers are the events and conditions that cause a Pokémon to evolve. Check out [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Methods_of_evolution) for greater detail.
 
   ## Parameters
 
@@ -227,7 +227,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:evolution_trigger], id_or_name)
 
   @doc """
-  Return a Generation.
+  A generation is a grouping of the Pokémon games that separates them based on the Pokémon they include. In each generation, a new set of Pokémon, Moves, Abilities and Types that did not exist in the previous generation are released.
 
   ## Parameters
 
@@ -239,7 +239,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:generation], id_or_name)
 
   @doc """
-  Return a Pokedex.
+  A Pokédex is a handheld electronic encyclopedia device; one which is capable of recording and retaining information of the various Pokémon in a given region with the exception of the national dex and some smaller dexes related to portions of a region. See [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9dex) for greater detail.
 
   ## Parameters
 
@@ -251,7 +251,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:pokedex], id_or_name)
 
   @doc """
-  Return a Version.
+  Versions of the games, e.g., Red, Blue or Yellow.
 
   ## Parameters
 
@@ -263,7 +263,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:version], id_or_name)
 
   @doc """
-  Return a Version Group.
+  Version groups categorize highly similar versions of the games.
 
   ## Parameters
 
@@ -275,7 +275,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:version_group], id_or_name)
 
   @doc """
-  Return a Item.
+  An item is an object in the games which the player can pick up, keep in their bag, and use in some manner. They have various uses, including healing, powering up, helping catch Pokémon, or to access a new area.
 
   ## Parameters
 
@@ -287,7 +287,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:item], id_or_name)
 
   @doc """
-  Return a Item Attribute.
+  Item attributes define particular aspects of items, e.g. "usable in battle" or "consumable".
 
   ## Parameters
 
@@ -299,7 +299,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:item_attribute], id_or_name)
 
   @doc """
-  Return a Item Category.
+  Item categories determine where items will be placed in the players bag.
 
   ## Parameters
 
@@ -311,7 +311,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:item_category], id_or_name)
 
   @doc """
-  Return a Item Fling Effect.
+  The various effects of the move "Fling" when used with different items.
 
   ## Parameters
 
@@ -323,7 +323,7 @@ defmodule MaxElixirPokeApi do
     do: Request.get(@resources_list[:item_fling_effect], id_or_name)
 
   @doc """
-  Return a Item Pocket.
+  Pockets within the players bag used for storing items by category.
 
   ## Parameters
     - **id_or_name:** `Integer` or `String` that represents the resource identify. `https://pokeapi.co/api/v2/item-pocket/{id or name}/`
