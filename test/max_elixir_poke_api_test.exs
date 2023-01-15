@@ -919,4 +919,234 @@ defmodule MaxElixirPokeApiTest do
       assert catch_error(MaxElixirPokeApi.move_target(:banana)) == :function_clause
     end
   end
+
+  describe "ability/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.ability("stench")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["is_main_series"] |> is_boolean
+      assert resource["generation"] |> is_map
+      assert resource["effect_entries"] |> is_list
+      assert resource["effect_changes"] |> is_list
+      assert resource["flavor_text_entries"] |> is_list
+      assert resource["pokemon"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.ability("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.ability(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.ability(:banana)) == :function_clause
+    end
+  end
+
+  describe "characteristic/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.characteristic(1)
+      assert resource["id"] |> is_integer
+      assert resource["gene_modulo"] |> is_integer
+      assert resource["possible_values"] |> is_list
+      assert resource["highest_stat"] |> is_map
+      assert resource["descriptions"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.characteristic(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.characteristic(:banana)) == :function_clause
+    end
+  end
+
+  describe "egg_group/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.egg_group("monster")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["pokemon_species"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.egg_group("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.egg_group(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.egg_group(:banana)) == :function_clause
+    end
+  end
+
+  describe "gender/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.gender("female")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["pokemon_species_details"] |> is_list
+      assert resource["required_for_evolution"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.gender("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.gender(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.gender(:banana)) == :function_clause
+    end
+  end
+
+  describe "growth_rate/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.growth_rate("slow")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["formula"] |> is_bitstring
+      assert resource["descriptions"] |> is_list
+      assert resource["levels"] |> is_list
+      assert resource["pokemon_species"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.growth_rate("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.growth_rate(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.growth_rate(:banana)) == :function_clause
+    end
+  end
+
+  describe "nature/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.nature("bold")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["decreased_stat"] |> is_map
+      assert resource["increased_stat"] |> is_map
+      assert resource["likes_flavor"] |> is_map
+      assert resource["hates_flavor"] |> is_map
+      assert resource["pokeathlon_stat_changes"] |> is_list
+      assert resource["move_battle_style_preferences"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.nature("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.nature(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.nature(:banana)) == :function_clause
+    end
+  end
+
+  describe "pokeathlon_stat/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.pokeathlon_stat("speed")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["names"] |> is_list
+      assert resource["affecting_natures"] |> is_map
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.pokeathlon_stat("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.pokeathlon_stat(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.pokeathlon_stat(:banana)) == :function_clause
+    end
+  end
+
+  describe "pokemon/1" do
+    @tag :not_runnable
+    test "success" do
+      { :ok, resource } = MaxElixirPokeApi.pokemon("clefairy")
+      assert resource["id"] |> is_integer
+      assert resource["name"] |> is_bitstring
+      assert resource["base_experience"] |> is_integer
+      assert resource["height"] |> is_integer
+      assert resource["is_default"] |> is_boolean
+      assert resource["order"] |> is_integer
+      assert resource["weight"] |> is_integer
+      assert resource["abilities"] |> is_list
+      assert resource["forms"] |> is_list
+      assert resource["game_indices"] |> is_list
+      assert resource["held_items"] |> is_list
+      assert resource["location_area_encounters"] |> is_bitstring
+      assert resource["moves"] |> is_list
+      assert resource["species"] |> is_map
+      assert resource["sprites"] |> is_map
+      assert resource["stats"] |> is_list
+      assert resource["types"] |> is_list
+      assert resource["past_types"] |> is_list
+    end
+
+    @tag :not_runnable
+    test "name not found" do
+      assert MaxElixirPokeApi.pokemon("banana") == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "id not found" do
+      assert MaxElixirPokeApi.pokemon(9999) == {:error, %{reason: "HTTP Status '404'"}}
+    end
+
+    @tag :not_runnable
+    test "datatype invalid [atom]" do
+      assert catch_error(MaxElixirPokeApi.pokemon(:banana)) == :function_clause
+    end
+  end
 end
