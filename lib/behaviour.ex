@@ -60,4 +60,5 @@ defmodule MaxElixirPokeApi.Behaviour do
   @callback pokemon_species(id_or_name) :: response
   @callback stat(id_or_name) :: response
   @callback type(id_or_name) :: response
+  @callback language(id_or_name) :: response
 end
