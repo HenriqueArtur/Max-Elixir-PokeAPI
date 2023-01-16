@@ -11,8 +11,10 @@ defmodule MaxElixirPokeApi.MixProject do
 
       # Doc
       name: "MaxElixirPokeApi",
+      description: "A Elixir wrapper with auto caching for PokeAPI ",
       source_url: "https://github.com/HenriqueArtur/Max-Elixir-PokeAPI",
       homepage_url: "https://github.com/HenriqueArtur/Max-Elixir-PokeAPI",
+      package: package(),
       docs: [
         main: "MaxElixirPokeApi", # The main page in the docs
         logo: "img/logo.png",
@@ -36,6 +38,14 @@ defmodule MaxElixirPokeApi.MixProject do
       {:jason, "~> 1.2"},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:cachex, "~> 3.4"}
+    ]
+  end
+
+  defp package() do
+    [
+      maintainers: ["Henrique Artur"],
+      licenses: ["BSD-3-Clause"],
+      links: %{"GitHub" => "https://github.com/HenriqueArtur/Max-Elixir-PokeAPI"}
     ]
   end
 end
