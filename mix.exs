@@ -15,8 +15,8 @@ defmodule MaxElixirPokeApi.MixProject do
       homepage_url: "https://github.com/HenriqueArtur/Max-Elixir-PokeAPI",
       docs: [
         main: "MaxElixirPokeApi", # The main page in the docs
-        # logo: "path/to/logo.png",
-        extras: ["README.md"]
+        logo: "img/logo.png",
+        # extras: ["README.md"]
       ]
     ]
   end
