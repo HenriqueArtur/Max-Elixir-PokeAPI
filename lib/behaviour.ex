@@ -1,6 +1,6 @@
 defmodule MaxElixirPokeApi.Behaviour do
   @moduledoc """
-  Main Behaviour
+  Behaviour from MaxElixirPokeApi.
   """
 
   @typedoc """
