@@ -1,10 +1,170 @@
 defmodule MaxElixirPokeApi do
   @moduledoc """
-  **WORKING IN PROGRESS**
-
-  MaxElixirPokeApi is a Elixir Structured(?) wrapper for [PokeAPI](https://pokeapi.co/).
+  MaxElixirPokeApi is a Elixir wrapper with auto caching for [PokeAPI](https://pokeapi.co/).
 
   This package has all function explicit in [PokeAPI Doc](https://pokeapi.co/docs/v2).
+
+  To use the resources just call `MaxElixirPokeApi.<resource_name>(id_or_name)`.
+
+  To list resources use `MaxElixirPokeApi.resource(resource_aton, limit, page)`.
+
+  If you want to create your own logic for calling resources use `MaxElixirPokeApi.Request.get(resource, id_or_name)`.
+
+  ## Examples
+
+      iex> MaxElixirPokeApi.berry(1)
+      {:ok,
+        %{
+          "firmness" => %{
+            "name" => "soft",
+            "url" => "https://pokeapi.co/api/v2/berry-firmness/2/"
+          },
+          "flavors" => [
+            %{
+              "flavor" => %{
+                "name" => "spicy",
+                "url" => "https://pokeapi.co/api/v2/berry-flavor/1/"
+              },
+              "potency" => 10
+            },
+            %{
+              "flavor" => %{
+                "name" => "dry",
+                "url" => "https://pokeapi.co/api/v2/berry-flavor/2/"
+              },
+              "potency" => 0
+            },
+            %{
+              "flavor" => %{
+                "name" => "sweet",
+                "url" => "https://pokeapi.co/api/v2/berry-flavor/3/"
+              },
+              "potency" => 0
+            },
+            %{
+              "flavor" => %{
+                "name" => "bitter",
+                "url" => "https://pokeapi.co/api/v2/berry-flavor/4/"
+              },
+              "potency" => 0
+            },
+            %{
+              "flavor" => %{
+                "name" => "sour",
+                "url" => "https://pokeapi.co/api/v2/berry-flavor/5/"
+              },
+              "potency" => 0
+            }
+          ],
+          "growth_time" => 3,
+          "id" => 1,
+          "item" => %{
+            "name" => "cheri-berry",
+            "url" => "https://pokeapi.co/api/v2/item/126/"
+          },
+          "max_harvest" => 5,
+          "name" => "cheri",
+          "natural_gift_power" => 60,
+          "natural_gift_type" => %{
+            "name" => "fire",
+            "url" => "https://pokeapi.co/api/v2/type/10/"
+          },
+          "size" => 20,
+          "smoothness" => 25,
+          "soil_dryness" => 15
+        }}
+
+      iex> MaxElixirPokeApi.resource(:berry, 5, 5)
+      {:ok,
+        %{
+          "count" => 64,
+          "next" => "https://pokeapi.co/api/v2/berry?offset=30&limit=5",
+          "previous" => "https://pokeapi.co/api/v2/berry?offset=20&limit=5",
+          "results" => [
+            %{
+              "name" => "tamato",
+              "url" => "https://pokeapi.co/api/v2/berry/26/"
+            },
+            %{
+              "name" => "cornn",
+              "url" => "https://pokeapi.co/api/v2/berry/27/"
+            },
+            %{
+              "name" => "magost",
+              "url" => "https://pokeapi.co/api/v2/berry/28/"
+            },
+            %{
+              "name" => "rabuta",
+              "url" => "https://pokeapi.co/api/v2/berry/29/"
+            },
+            %{
+              "name" => "nomel",
+              "url" => "https://pokeapi.co/api/v2/berry/30/"
+            }
+          ]
+        }}
+
+      iex> MaxElixirPokeApi.Request.get("berry", 1)
+      {:ok,
+        %{
+          "firmness" => %{
+            "name" => "soft",
+            "url" => "https://pokeapi.co/api/v2/berry-firmness/2/"
+          },
+          "flavors" => [
+            %{
+              "flavor" => %{
+                "name" => "spicy",
+                "url" => "https://pokeapi.co/api/v2/berry-flavor/1/"
+              },
+              "potency" => 10
+            },
+            %{
+              "flavor" => %{
+                "name" => "dry",
+                "url" => "https://pokeapi.co/api/v2/berry-flavor/2/"
+              },
+              "potency" => 0
+            },
+            %{
+              "flavor" => %{
+                "name" => "sweet",
+                "url" => "https://pokeapi.co/api/v2/berry-flavor/3/"
+              },
+              "potency" => 0
+            },
+            %{
+              "flavor" => %{
+                "name" => "bitter",
+                "url" => "https://pokeapi.co/api/v2/berry-flavor/4/"
+              },
+              "potency" => 0
+            },
+            %{
+              "flavor" => %{
+                "name" => "sour",
+                "url" => "https://pokeapi.co/api/v2/berry-flavor/5/"
+              },
+              "potency" => 0
+            }
+          ],
+          "growth_time" => 3,
+          "id" => 1,
+          "item" => %{
+            "name" => "cheri-berry",
+            "url" => "https://pokeapi.co/api/v2/item/126/"
+          },
+          "max_harvest" => 5,
+          "name" => "cheri",
+          "natural_gift_power" => 60,
+          "natural_gift_type" => %{
+            "name" => "fire",
+            "url" => "https://pokeapi.co/api/v2/type/10/"
+          },
+          "size" => 20,
+          "smoothness" => 25,
+          "soil_dryness" => 15
+        }}
   """
 
   @behaviour MaxElixirPokeApi.Behaviour
