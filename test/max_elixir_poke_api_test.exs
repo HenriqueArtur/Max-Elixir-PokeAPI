@@ -1,5 +1,5 @@
 defmodule MaxElixirPokeApiTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
   doctest MaxElixirPokeApi
 
   defp is_bitstring_or_nil(value), do: is_bitstring(value) or is_nil(value)
