@@ -17,7 +17,7 @@ As of v0.16.0, MaxElixirPokeAPI is available on [Hex](https://hex.pm/). You can 
 
 ```elixir
 def deps do
-  {:max_elixir_poke_api, "~> 0.16.0"}
+  {:max_elixir_poke_api, "~> 1.0.0"}
 end
 ```
 
