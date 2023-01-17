@@ -1,5 +1,5 @@
 defmodule MaxElixirPokeApiTest do
-  use ExUnit.Case, async: false
+  use ExUnit.Case, async: true
   doctest MaxElixirPokeApi
 
   defp is_bitstring_or_nil(value), do: is_bitstring(value) or is_nil(value)
@@ -8,9 +8,9 @@ defmodule MaxElixirPokeApiTest do
 
   @tag :not_runnable
   test "caching" do
-    assert Cachex.exists?(:max_elixir_cache, "berry-1") == {:ok, false}
-    MaxElixirPokeApi.berry(1)
-    assert Cachex.exists?(:max_elixir_cache, "berry-1") == {:ok, true}
+    assert Cachex.exists?(:max_elixir_cache, "berry-3") == {:ok, false}
+    MaxElixirPokeApi.berry(3)
+    assert Cachex.exists?(:max_elixir_cache, "berry-3") == {:ok, true}
   end
 
   describe "resource/3" do
