@@ -5,7 +5,7 @@ defmodule MaxElixirPokeApi.Request do
   @type response :: {:ok, map} | {:error, %{reason: String.t()}}
 
   @url "https://pokeapi.co/api/v2/"
-  @http_client Application.get_env(:max_elixir_poke_api, :http_adapter, HTTPoison)
+  @http_client Application.compile_env(:max_elixir_poke_api, :http_adapter, HTTPoison)
 
   @doc """
   Resource List endpoint pipeline.
