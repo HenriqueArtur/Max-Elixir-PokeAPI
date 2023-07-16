@@ -5,7 +5,6 @@ defmodule MaxElixirPokeApi.Request do
   @type response :: {:ok, map} | {:error, %{reason: String.t()}}
 
   @url "https://pokeapi.co/api/v2/"
-  @http_client Application.compile_env(:max_elixir_poke_api, :http_adapter, HTTPoison)
 
   @doc """
   Resource List endpoint pipeline.
@@ -20,9 +19,7 @@ defmodule MaxElixirPokeApi.Request do
         {:ok, false} ->
           resource
           |> make_url(limit, page)
-          |> client_get
-          |> response
-          |> decode
+          |> MaxElixirPokeApi.HttpClient.get
           |> save_cache(resource)
       end
     else
@@ -43,9 +40,7 @@ defmodule MaxElixirPokeApi.Request do
       {:ok, false} ->
         resource
         |> make_url(id_or_name)
-        |> client_get
-        |> response
-        |> decode
+        |> MaxElixirPokeApi.HttpClient.get
         |> save_cache(key)
     end
   end
@@ -53,18 +48,6 @@ defmodule MaxElixirPokeApi.Request do
   @doc false
   defp make_url(resource, id_or_name), do: "#{@url}#{resource}/#{to_string(id_or_name)}"
   defp make_url(resource, limit, page), do: "#{@url}#{resource}?limit=#{limit}&offset=#{limit * page}"
-
-  @doc false
-  defp client_get(url), do: @http_client.get(url)
-
-  @doc false
-  defp response({:ok, %{status_code: 200, body: body}}), do: {:ok, body}
-  defp response({:ok, %{status_code: status_code}}), do: {:error, %{reason: "HTTP Status '#{status_code}'"}}
-  defp response({:error, reason}), do: {:error, reason: reason}
-
-  @doc false
-  defp decode({:error, _reason} = response), do: response
-  defp decode({:ok, body}), do: {:ok, Jason.decode!(body)}
 
   @doc false
   defp save_cache(resource, key) do
