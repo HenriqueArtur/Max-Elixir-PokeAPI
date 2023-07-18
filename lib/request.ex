@@ -1,6 +1,11 @@
 defmodule MaxElixirPokeApi.Request do
   @moduledoc false
 
+  alias MaxElixirPokeApi.{
+    Cache,
+    HttpClient
+  }
+
   @type id_or_name :: String.t() | integer
   @type response :: {:ok, map} | {:error, %{reason: String.t()}}
 
@@ -12,14 +17,14 @@ defmodule MaxElixirPokeApi.Request do
   @spec get(String.t(), integer, integer) :: response
   def get(resource, limit, page) do
     if resource do
-      case Cachex.exists?(:max_elixir_cache, resource) do
+      case Cache.exists?(:max_elixir_cache, resource) do
         {:ok, true} ->
-          {:ok, value} = Cachex.get(:max_elixir_cache, resource)
+          {:ok, value} = Cache.get(:max_elixir_cache, resource)
           value
         {:ok, false} ->
           resource
           |> make_url(limit, page)
-          |> MaxElixirPokeApi.HttpClient.get
+          |> HttpClient.get
           |> save_cache(resource)
       end
     else
@@ -33,14 +38,14 @@ defmodule MaxElixirPokeApi.Request do
   @spec get(String.t(), id_or_name) :: response
   def get(resource, id_or_name) do
     key = "#{resource}-#{id_or_name}"
-    case Cachex.exists?(:max_elixir_cache, key) do
+    case Cache.exists?(:max_elixir_cache, key) do
       {:ok, true} ->
-        {:ok, value} = Cachex.get(:max_elixir_cache, key)
+        {:ok, value} = Cache.get(:max_elixir_cache, key)
         value
       {:ok, false} ->
         resource
         |> make_url(id_or_name)
-        |> MaxElixirPokeApi.HttpClient.get
+        |> HttpClient.get
         |> save_cache(key)
     end
   end
@@ -51,7 +56,7 @@ defmodule MaxElixirPokeApi.Request do
 
   @doc false
   defp save_cache(resource, key) do
-    Cachex.put(:max_elixir_cache, key, resource)
-    resource
+    { _status, data }= Cache.put(:max_elixir_cache, key, resource)
+    data
   end
 end
