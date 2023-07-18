@@ -38,7 +38,7 @@ defmodule MaxElixirPokeApi.MixProject do
       {:jason, "~> 1.2"},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:cachex, "~> 3.4"},
-      {:mox, "~> 1.0", only: :test}
+      {:hammox, "~> 0.7", only: :test}
     ]
   end
 
