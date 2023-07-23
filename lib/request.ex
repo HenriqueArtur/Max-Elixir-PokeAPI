@@ -2,14 +2,15 @@ defmodule MaxElixirPokeApi.Request do
   @moduledoc false
 
   alias MaxElixirPokeApi.{
-    Cache,
-    HttpClient
+    Cache
   }
 
   @type id_or_name :: String.t() | integer
   @type response :: {:ok, map} | {:error, %{reason: String.t()}}
 
   @url "https://pokeapi.co/api/v2/"
+
+  @http_client Application.compile_env(:max_elixir_poke_api, :http_client)
 
   @doc """
   Resource List endpoint pipeline.
@@ -24,7 +25,7 @@ defmodule MaxElixirPokeApi.Request do
         {:ok, false} ->
           resource
           |> make_url(limit, page)
-          |> HttpClient.get
+          |> get_url
           |> save_cache(resource)
       end
     else
@@ -45,7 +46,7 @@ defmodule MaxElixirPokeApi.Request do
       {:ok, false} ->
         resource
         |> make_url(id_or_name)
-        |> HttpClient.get
+        |> get_url
         |> save_cache(key)
     end
   end
@@ -53,6 +54,9 @@ defmodule MaxElixirPokeApi.Request do
   @doc false
   defp make_url(resource, id_or_name), do: "#{@url}#{resource}/#{to_string(id_or_name)}"
   defp make_url(resource, limit, page), do: "#{@url}#{resource}?limit=#{limit}&offset=#{limit * page}"
+
+  @doc false
+  defp get_url(url), do: @http_client.get(url)
 
   @doc false
   defp save_cache(resource, key) do
