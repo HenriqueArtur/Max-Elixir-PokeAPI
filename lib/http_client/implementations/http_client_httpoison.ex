@@ -1,4 +1,6 @@
 defmodule MaxElixirPokeApi.HttpClient.HTTPoison do
+  @moduledoc false
+
   @behaviour MaxElixirPokeApi.HttpClient
 
   @impl true
