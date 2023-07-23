@@ -1,4 +1,6 @@
 defmodule MaxElixirPokeApi.Cache do
+  @moduledoc false
+
   @behaviour MaxElixirPokeApi.Cache.Behaviour
 
   def exists?(cache, key), do: Cachex.exists?(cache, key)
