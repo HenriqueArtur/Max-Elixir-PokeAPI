@@ -14,7 +14,7 @@ defmodule MaxElixirPokeApi.HttpClient.HTTPoison do
   @doc false
   defp response({:ok, %{status_code: 200, body: body}}), do: {:ok, body}
   defp response({:ok, %{status_code: status_code}}), do: {:error, %{reason: "HTTP Status '#{status_code}'"}}
-  defp response({:error, reason} = err), do: err
+  defp response({:error, _reason} = err), do: err
 
   @doc false
   defp decode({:error, _reason} = response), do: response
