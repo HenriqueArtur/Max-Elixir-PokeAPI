@@ -1,4 +1,4 @@
-defmodule MaxElixirPokeApi.Cache do
+defmodule MaxElixirPokeApi.Cache.Cachex do
   @moduledoc false
 
   @behaviour MaxElixirPokeApi.Cache.Behaviour
