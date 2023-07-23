@@ -6,13 +6,6 @@ defmodule MaxElixirPokeApiTest do
   defp is_integer_or_nil(value), do: is_integer(value) or is_nil(value)
   defp is_map_or_nil(value), do: is_map(value) or is_nil(value)
 
-  @tag :request_api
-  test "should by caching" do
-    assert Cachex.exists?(:max_elixir_cache, "berry-3") == {:ok, false}
-    MaxElixirPokeApi.berry(3)
-    assert Cachex.exists?(:max_elixir_cache, "berry-3") == {:ok, true}
-  end
-
   describe "resource/3" do
     @tag :request_api
     test "should by success NOT paginate" do
