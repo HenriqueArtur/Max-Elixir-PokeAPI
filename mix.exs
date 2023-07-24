@@ -4,7 +4,7 @@ defmodule MaxElixirPokeApi.MixProject do
   def project do
     [
       app: :max_elixir_poke_api,
-      version: "1.0.0",
+      version: "1.1.0",
       elixir: "~> 1.13",
       deps: deps(),
       start_permanent: Mix.env() == :prod,
