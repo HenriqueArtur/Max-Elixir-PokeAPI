@@ -31,9 +31,12 @@ end
 
 To use the resources just call `MaxElixirPokeApi.<resource_name>(id_or_name)`.
 
+List all resources functions at [Doc](https://hexdocs.pm/max_elixir_poke_api/MaxElixirPokeApi.html#functions).
+
 ```elixir
 MaxElixirPokeApi.berry(1)
 ```
+
 
 To list resources use `MaxElixirPokeApi.resource(resource_aton, limit, page)`.
 
