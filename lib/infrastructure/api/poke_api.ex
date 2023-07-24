@@ -11,19 +11,15 @@ defmodule MaxElixirPokeApi.PokeAPI do
 
   @spec fetch(String.t(), integer, integer) :: response
   def fetch(resource, limit, page) do
-    if resource do
-      case @cache.exists?(:max_elixir_cache, resource) do
-        {:ok, true} ->
-          {:ok, value} = @cache.get(:max_elixir_cache, resource)
-          value
-        {:ok, false} ->
-          resource
-          |> make_url(limit, page)
-          |> get_url
-          |> save_cache(resource)
-      end
-    else
-      {:error, %{reason: "resource not valid."}}
+    case @cache.exists?(:max_elixir_cache, resource) do
+      {:ok, true} ->
+        {:ok, value} = @cache.get(:max_elixir_cache, resource)
+        value
+      {:ok, false} ->
+        resource
+        |> make_url(limit, page)
+        |> get_url
+        |> save_cache(resource)
     end
   end
 
