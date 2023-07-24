@@ -1,4 +1,4 @@
-defmodule MaxElixirPokeApi.Request do
+defmodule MaxElixirPokeApi.PokeAPI do
   @moduledoc false
 
   @http_client Application.compile_env(:max_elixir_poke_api, :http_client)
@@ -9,8 +9,8 @@ defmodule MaxElixirPokeApi.Request do
 
   @url "https://pokeapi.co/api/v2/"
 
-  @spec get(String.t(), integer, integer) :: response
-  def get(resource, limit, page) do
+  @spec fetch(String.t(), integer, integer) :: response
+  def fetch(resource, limit, page) do
     if resource do
       case @cache.exists?(:max_elixir_cache, resource) do
         {:ok, true} ->
@@ -30,8 +30,8 @@ defmodule MaxElixirPokeApi.Request do
   @doc """
   Single Resource endpoint pipeline.
   """
-  @spec get(String.t(), id_or_name) :: response
-  def get(resource, id_or_name) do
+  @spec fetch(String.t(), id_or_name) :: response
+  def fetch(resource, id_or_name) do
     key = "#{resource}-#{id_or_name}"
     case @cache.exists?(:max_elixir_cache, key) do
       {:ok, true} ->
