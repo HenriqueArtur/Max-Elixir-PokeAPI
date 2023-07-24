@@ -41,6 +41,57 @@ To list resources use `MaxElixirPokeApi.resource(resource_aton, limit, page)`.
 MaxElixirPokeApi.resource(:berry, 5, 5)
 ```
 
+### 📋 Resources atons list
+
+    :berry
+    :berry_firmness
+    :berry_flavor
+    :contest_type
+    :contest_effect
+    :super_contest_effect
+    :encounter_method
+    :encounter_condition
+    :encounter_condition_value
+    :evolution_chain
+    :evolution_trigger
+    :generation
+    :pokedex
+    :version
+    :version_group
+    :item
+    :item_attribute
+    :item_category
+    :item_fling_effect
+    :item_pocket
+    :location
+    :location_area
+    :pal_park_area
+    :region
+    :machine
+    :move
+    :move_ailment
+    :move_battle_style
+    :move_category
+    :move_damage_class
+    :move_learn_method
+    :move_target
+    :ability
+    :characteristic
+    :egg_group
+    :gender
+    :growth_rate
+    :nature
+    :pokeathlon_stat
+    :pokemon
+    :pokemon_color
+    :pokemon_form
+    :pokemon_habitat
+    :pokemon_shape
+    :pokemon_species
+    :stat
+    :type
+    :language
+
 ## 🤝 Contribute
 
 I value every contribution, no matter how big or small. Here are the steps to get started with contributing:
